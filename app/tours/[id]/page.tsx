@@ -86,6 +86,7 @@ export default async function TourPage({ params }: PageProps) {
             </ol>
           </section>
 
+          <section className="grid gap-3"><h2 className="text-2xl font-bold text-slate-950">Маршрут на карте</h2><TourMapSection title={tour.title} coordinates={tour.coordinates} routePoints={tour.routePoints} /></section>
           <section className="grid gap-3"><h2 className="text-2xl font-bold text-slate-950">Маршрут на карте</h2><TourMap title={tour.title} coordinates={tour.coordinates} routePoints={tour.routePoints} /></section>
 
           <section className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
