@@ -1,6 +1,11 @@
+import path from "node:path";
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+const databaseUrl = process.env.DATABASE_URL ?? `file:${path.join(process.cwd(), "prisma", "dev.db")}`;
+
+const prisma = new PrismaClient({
+  datasources: { db: { url: databaseUrl } }
+});
 const shouldReset = process.argv.includes("--reset");
 
 const dropStatements = [

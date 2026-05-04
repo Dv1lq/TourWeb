@@ -1,6 +1,11 @@
+import path from "node:path";
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+const databaseUrl = process.env.DATABASE_URL ?? `file:${path.join(process.cwd(), "prisma", "dev.db")}`;
+
+const prisma = new PrismaClient({
+  datasources: { db: { url: databaseUrl } }
+});
 
 const demoUserId = "demo-user";
 
@@ -814,6 +819,7 @@ async function main() {
 
   for (const tour of tours) {
     const { guideSlug, route, program, ...tourData } = tour;
+    delete (tourData as Record<string, unknown>).gallery;
     await prisma.tour.create({
       data: {
         ...tourData,
