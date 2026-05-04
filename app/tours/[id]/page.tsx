@@ -39,6 +39,10 @@ export default async function TourPage({ params }: PageProps) {
     notFound();
   }
 
+  const fallbackImage = tour.gallery?.[0] || "/images/tours/night-bridges-canals-cover.jpg";
+  const coverImage = tour.image || fallbackImage;
+  const routePhotos = (tour.gallery || []).filter(Boolean).slice(0, 2);
+
   return (
     <div className="pb-14">
       <section className="bg-white">
@@ -61,7 +65,7 @@ export default async function TourPage({ params }: PageProps) {
             </div>
           </div>
           <div className="overflow-hidden rounded-lg border border-slate-200 bg-slate-100 shadow-soft">
-            <img src={tour.image} alt={tour.title} className="aspect-[16/11] h-full w-full object-cover" />
+            <img src={coverImage} alt={tour.title} className="aspect-[16/11] h-full w-full object-cover" />
           </div>
         </div>
       </section>
@@ -84,11 +88,15 @@ export default async function TourPage({ params }: PageProps) {
 
           <section className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="text-2xl font-bold text-slate-950">Фотографии маршрута</h2>
-            <div className="mt-5 grid gap-4 md:grid-cols-3">
-              {tour.gallery.slice(0, 2).map((image) => (
-                <img key={image} src={image} alt={tour.title} className="aspect-[4/3] rounded-lg object-cover" />
-              ))}
-            </div>
+            {routePhotos.length > 0 ? (
+              <div className="mt-5 grid gap-4 md:grid-cols-3">
+                {routePhotos.map((image) => (
+                  <img key={image} src={image} alt={tour.title} className="aspect-[4/3] rounded-lg object-cover" />
+                ))}
+              </div>
+            ) : (
+              <p className="mt-4 text-sm text-slate-600">Фотографии маршрута скоро появятся.</p>
+            )}
           </section>
 
           <section className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">

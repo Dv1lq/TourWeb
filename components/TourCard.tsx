@@ -5,11 +5,14 @@ import { formatDuration, formatMoney } from "@/lib/utils";
 import { Rating } from "@/components/Rating";
 
 export function TourCard({ tour }: { tour: TourView }) {
+  const fallbackImage = tour.gallery?.[0] || "/images/tours/night-bridges-canals-cover.jpg";
+  const coverImage = tour.image || fallbackImage;
+
   return (
     <article className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft">
       <Link href={`/tours/${tour.slug}`} className="block">
         <div className="aspect-[16/10] overflow-hidden bg-slate-200">
-          <img src={tour.image} alt={tour.title} className="h-full w-full object-cover" />
+          <img src={coverImage} alt={tour.title} className="h-full w-full object-cover" />
         </div>
       </Link>
       <div className="grid gap-4 p-5">

@@ -17,9 +17,31 @@ function guideAsset(slug: string) {
   return `/images/guides/${slug}.jpg`;
 }
 
-function image() { // legacy helper for old seed literals
-  return "";
-}
+
+const tourImageSlugByTourSlug: Record<string, string> = {
+  "kazan-kremlin-kul-sharif": "kazan-kremlin",
+  "sviyazhsk-raifa-day-trip": "sviyazhsk-raifa",
+  "blue-lakes-temple-all-religions": "blue-lakes-temple",
+  "moscow-red-square-kremlin": "moscow-red-square",
+  "tretyakov-gallery-art": "tretyakov-gallery",
+  "vdnh-ostankino-soviet-modern": "vdnh-ostankino",
+  "bunker-42-underground-moscow": "bunker-42",
+  "hermitage-masterpieces": "hermitage",
+  "peter-paul-fortress-history": "peter-paul-fortress",
+  "night-bridges-canals": "night-bridges-canals",
+  "peterhof-fountains": "peterhof",
+  "olkhon-baikal-legends": "olkhon-baikal",
+  "listvyanka-circum-baikal-railway": "listvyanka-circum-baikal",
+  "buryatia-ethno-route": "buryatia-ethno",
+  "old-tbilisi-narikala-baths": "old-tbilisi",
+  "sololaki-rustaveli-architecture": "sololaki-rustaveli",
+  "mtskheta-day-trip": "mtskheta",
+  "dubai-burj-khalifa-future": "dubai-burj-future",
+  "al-fahidi-dubai-creek": "al-fahidi-creek",
+  "palm-marina-evening-dubai": "palm-marina-dubai",
+  "dubai-desert-safari-certified": "dubai-desert-safari"
+};
+
 
 function issued(value: string) {
   return new Date(`${value}T09:00:00.000Z`);
@@ -823,10 +845,13 @@ async function main() {
     await prisma.tour.create({
       data: {
         ...tourData,
-        image: tourAsset(tour.slug, "cover"),
+        image: tourAsset(tourImageSlugByTourSlug[tour.slug] ?? tour.slug, "cover"),
         routeJson: JSON.stringify(route),
         programJson: JSON.stringify(program),
-        galleryJson: JSON.stringify([tourAsset(tour.slug, "route-1"), tourAsset(tour.slug, "route-2")]),
+        galleryJson: JSON.stringify([
+          tourAsset(tourImageSlugByTourSlug[tour.slug] ?? tour.slug, "route-1"),
+          tourAsset(tourImageSlugByTourSlug[tour.slug] ?? tour.slug, "route-2")
+        ]),
         guideId: guideMap[guideSlug].id
       }
     });
