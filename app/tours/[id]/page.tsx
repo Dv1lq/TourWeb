@@ -3,11 +3,17 @@ import { notFound } from "next/navigation";
 import { BadgeCheck, CalendarCheck, Clock, Languages, MapPin, UsersRound } from "lucide-react";
 import { CertificateBadge } from "@/components/CertificateBadge";
 import { Rating } from "@/components/Rating";
-import { RouteMap } from "@/components/RouteMap";
+import dynamic from "next/dynamic";
 import { WeatherWidget } from "@/components/WeatherWidget";
 import { prisma } from "@/lib/prisma";
 import { serializeTour } from "@/lib/serializers";
 import { formatDate, formatDuration, formatMoney } from "@/lib/utils";
+
+
+const TourMap = dynamic(() => import("@/components/TourMap").then((mod) => mod.TourMap), {
+  ssr: false,
+  loading: () => <div className="rounded-lg border border-slate-200 bg-white p-6 text-slate-600">Карта временно недоступна</div>
+});
 
 type PageProps = {
   params: Promise<{ id: string }>;
@@ -79,12 +85,12 @@ export default async function TourPage({ params }: PageProps) {
             </ol>
           </section>
 
-          <RouteMap route={tour.route} />
+          <section className="grid gap-3"><h2 className="text-2xl font-bold text-slate-950">Маршрут на карте</h2><TourMap title={tour.title} coordinates={tour.coordinates} routePoints={tour.routePoints} /></section>
 
           <section className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="text-2xl font-bold text-slate-950">Фотографии маршрута</h2>
             <div className="mt-5 grid gap-4 md:grid-cols-3">
-              {tour.gallery.map((image) => (
+              {tour.gallery.slice(0, 2).map((image) => (
                 <img key={image} src={image} alt={tour.title} className="aspect-[4/3] rounded-lg object-cover" />
               ))}
             </div>
