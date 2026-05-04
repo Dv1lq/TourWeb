@@ -1,6 +1,11 @@
+import path from "node:path";
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+const databaseUrl = process.env.DATABASE_URL ?? `file:${path.join(process.cwd(), "prisma", "dev.db")}`;
+
+const prisma = new PrismaClient({
+  datasources: { db: { url: databaseUrl } }
+});
 
 const demoUserId = "demo-user";
 
@@ -58,7 +63,7 @@ async function main() {
       rating: 4.9,
       completedTours: 1240,
       certificateNumber: "РТ-ГИД-2021-0448",
-      certificateIssuedAt: issued("2021-04-18"),
+      certificateIssuedAt: issued("2021-04-10"),
       certificateIssuer: "Государственный комитет Республики Татарстан по туризму",
       bio: "Проводит авторские маршруты по Казанскому кремлю, Старо-Татарской слободе и объектам ЮНЕСКО. Делает акцент на проверенных исторических источниках и комфортном темпе группы."
     },
@@ -74,8 +79,8 @@ async function main() {
       rating: 4.8,
       completedTours: 860,
       certificateNumber: "РТ-ЭКО-2022-0191",
-      certificateIssuedAt: issued("2022-06-11"),
-      certificateIssuer: "Ассоциация гидов-переводчиков Татарстана",
+      certificateIssuedAt: issued("2022-06-03"),
+      certificateIssuer: "Ассоциация экскурсоводов Республики Татарстан",
       bio: "Специализируется на маршрутах к Голубым озерам, Свияжску и Раифскому монастырю. Следит за безопасностью на природных участках и заранее проверяет логистику."
     },
     {
@@ -90,8 +95,8 @@ async function main() {
       rating: 4.95,
       completedTours: 1515,
       certificateNumber: "МСК-ИСК-2020-1120",
-      certificateIssuedAt: issued("2020-10-02"),
-      certificateIssuer: "Комитет по туризму города Москвы",
+      certificateIssuedAt: issued("2020-09-18"),
+      certificateIssuer: "Департамент культуры города Москвы",
       bio: "Искусствовед и аккредитованный московский экскурсовод. Помогает увидеть знакомые музеи и площади через детали, которые обычно остаются вне маршрута."
     },
     {
@@ -106,8 +111,8 @@ async function main() {
       rating: 4.82,
       completedTours: 930,
       certificateNumber: "МСК-ГИД-2022-0317",
-      certificateIssuedAt: issued("2022-03-21"),
-      certificateIssuer: "Мостуризм",
+      certificateIssuedAt: issued("2022-02-12"),
+      certificateIssuer: "Московская ассоциация гидов-переводчиков",
       bio: "Ведет маршруты по ВДНХ, Останкино, Коломенскому и Бункеру-42. Сочетает факты, архивные материалы и понятный рассказ без перегруза датами."
     },
     {
@@ -122,8 +127,8 @@ async function main() {
       rating: 4.97,
       completedTours: 1740,
       certificateNumber: "СПБ-МУЗ-2019-0822",
-      certificateIssuedAt: issued("2019-09-15"),
-      certificateIssuer: "Санкт-Петербургский туристско-информационный центр",
+      certificateIssuedAt: issued("2019-05-14"),
+      certificateIssuer: "Комитет по развитию туризма Санкт-Петербурга",
       bio: "Профессиональный музейный гид. Строит экскурсии по Эрмитажу так, чтобы группа понимала логику коллекций, а не просто проходила от шедевра к шедевру."
     },
     {
@@ -138,8 +143,8 @@ async function main() {
       rating: 4.86,
       completedTours: 1190,
       certificateNumber: "СПБ-ГИД-2021-0506",
-      certificateIssuedAt: issued("2021-05-06"),
-      certificateIssuer: "Ассоциация профессиональных гидов Санкт-Петербурга",
+      certificateIssuedAt: issued("2021-08-07"),
+      certificateIssuer: "Туристско-информационное бюро Санкт-Петербурга",
       bio: "Проводит прогулки по Петропавловской крепости, Невскому проспекту и ночным мостам. Умеет адаптировать сложную архитектурную тему для семейных групп."
     },
     {
@@ -154,8 +159,8 @@ async function main() {
       rating: 4.91,
       completedTours: 980,
       certificateNumber: "БКЛ-ЭКО-2018-0074",
-      certificateIssuedAt: issued("2018-07-30"),
-      certificateIssuer: "Байкальская ассоциация гидов и инструкторов",
+      certificateIssuedAt: issued("2018-07-22"),
+      certificateIssuer: "Ассоциация гидов Байкальского региона",
       bio: "Организует маршруты по Ольхону, Листвянке, КБЖД и Бурятии. Делает упор на ответственное посещение природных территорий и местные традиции."
     },
     {
@@ -170,7 +175,7 @@ async function main() {
       rating: 4.88,
       completedTours: 1035,
       certificateNumber: "GTA-TBS-2021-209",
-      certificateIssuedAt: issued("2021-03-09"),
+      certificateIssuedAt: issued("2021-03-16"),
       certificateIssuer: "Georgian Tourism Association",
       bio: "Рассказывает о Тбилиси через дворы, балконы, серные бани и старые городские семьи. Хорошо знает маршруты для первого знакомства и повторных поездок."
     },
@@ -186,7 +191,7 @@ async function main() {
       rating: 4.84,
       completedTours: 1120,
       certificateNumber: "DTCM-LG-2020-5831",
-      certificateIssuedAt: issued("2020-11-12"),
+      certificateIssuedAt: issued("2020-11-25"),
       certificateIssuer: "Dubai Department of Economy and Tourism",
       bio: "Лицензированный гид Дубая с опытом городских и пустынных программ. Следит за таймингом, погодой и комфортом группы в жарком климате."
     }
@@ -216,7 +221,7 @@ async function main() {
       reviewCount: 164,
       language: "Русский",
       maxGroupSize: 12,
-      image: image("Kazan Kremlin Kul Sharif mosque"),
+      image: "",
       meetingPoint: "Спасская башня Казанского кремля",
       latitude: 55.7989,
       longitude: 49.1059,
@@ -226,7 +231,7 @@ async function main() {
         { title: "Благовещенский собор", lat: 55.7995, lon: 49.1069, note: "Православное наследие кремля" }
       ],
       program: ["Сбор у Спасской башни и вводная по истории города", "Прогулка по кремлевским стенам и смотровым точкам", "Посещение территории мечети Кул-Шариф", "Разбор архитектурных слоев кремля и ответы на вопросы"],
-      gallery: [image("Kazan Kremlin walls"), image("Kul Sharif interior"), image("Kazan city panorama")]
+      gallery: ["", "", ""]
     },
     {
       slug: "sviyazhsk-raifa-day-trip",
@@ -245,7 +250,7 @@ async function main() {
       reviewCount: 97,
       language: "Русский",
       maxGroupSize: 6,
-      image: image("Sviyazhsk Russia monastery"),
+      image: "",
       meetingPoint: "Центр семьи «Казан»",
       latitude: 55.7714,
       longitude: 48.6597,
@@ -255,7 +260,7 @@ async function main() {
         { title: "Раифский монастырь", lat: 55.9026, lon: 48.7293, note: "История обители и озерные виды" }
       ],
       program: ["Выезд из Казани и рассказ о Волге", "Пешеходный маршрут по Свияжску", "Время на обед в локальном кафе", "Посещение Раифского монастыря", "Возвращение в Казань"],
-      gallery: [image("Sviyazhsk island"), image("Raifa monastery"), image("Volga river Tatarstan")]
+      gallery: ["", "", ""]
     },
     {
       slug: "blue-lakes-temple-all-religions",
@@ -274,7 +279,7 @@ async function main() {
       reviewCount: 73,
       language: "Русский",
       maxGroupSize: 8,
-      image: image("Blue Lakes Kazan nature"),
+      image: "",
       meetingPoint: "Станция метро Козья Слобода",
       latitude: 55.873,
       longitude: 49.153,
@@ -283,7 +288,7 @@ async function main() {
         { title: "Храм всех религий", lat: 55.8016, lon: 48.9717, note: "Осмотр фасадов и история проекта" }
       ],
       program: ["Переезд к Голубым озерам", "Прогулка по безопасной тропе и фото-паузы", "Переезд к Храму всех религий", "Обсуждение идеи культурного синтеза"],
-      gallery: [image("Kazan Blue Lake"), image("Temple of All Religions Kazan"), image("Kazan nature trail")]
+      gallery: ["", "", ""]
     },
     {
       slug: "moscow-red-square-kremlin",
@@ -302,7 +307,7 @@ async function main() {
       reviewCount: 212,
       language: "Русский",
       maxGroupSize: 15,
-      image: image("Moscow Red Square Kremlin"),
+      image: "",
       meetingPoint: "Памятник маршалу Жукову",
       latitude: 55.7539,
       longitude: 37.6208,
@@ -312,7 +317,7 @@ async function main() {
         { title: "Александровский сад", lat: 55.7525, lon: 37.6135, note: "Мемориальные пространства центра" }
       ],
       program: ["Встреча у Исторического музея", "Красная площадь и ГУМ", "Внешний контур Кремля", "Александровский сад и Манежная площадь"],
-      gallery: [image("Kremlin towers Moscow"), image("Saint Basils Cathedral Moscow"), image("Alexander Garden Moscow")]
+      gallery: ["", "", ""]
     },
     {
       slug: "tretyakov-gallery-art",
@@ -331,7 +336,7 @@ async function main() {
       reviewCount: 185,
       language: "Русский",
       maxGroupSize: 10,
-      image: image("Tretyakov Gallery Moscow art"),
+      image: "",
       meetingPoint: "Вход в Третьяковскую галерею в Лаврушинском переулке",
       latitude: 55.7414,
       longitude: 37.6208,
@@ -341,7 +346,7 @@ async function main() {
         { title: "Залы XIX века", lat: 55.7414, lon: 37.6208, note: "Передвижники и реализм" }
       ],
       program: ["История галереи и коллекционера", "Древнерусская икона", "Брюллов, Иванов и Суриков", "Передвижники и художественные споры XIX века"],
-      gallery: [image("Russian art museum"), image("Tretyakov Gallery hall"), image("Moscow museum interior")]
+      gallery: ["", "", ""]
     },
     {
       slug: "vdnh-ostankino-soviet-modern",
@@ -360,7 +365,7 @@ async function main() {
       reviewCount: 88,
       language: "Русский",
       maxGroupSize: 14,
-      image: image("VDNKh Moscow Ostankino tower"),
+      image: "",
       meetingPoint: "Арка главного входа ВДНХ",
       latitude: 55.8298,
       longitude: 37.6335,
@@ -370,7 +375,7 @@ async function main() {
         { title: "Останкинская телебашня", lat: 55.8197, lon: 37.6117, note: "Инженерная доминанта района" }
       ],
       program: ["История выставки и главный вход", "Центральная аллея и павильоны", "Фонтанные площади", "Переход к Останкинской телебашне"],
-      gallery: [image("VDNKh fountain"), image("Ostankino tower"), image("Moscow soviet architecture")]
+      gallery: ["", "", ""]
     },
     {
       slug: "bunker-42-underground-moscow",
@@ -389,7 +394,7 @@ async function main() {
       reviewCount: 62,
       language: "Русский",
       maxGroupSize: 10,
-      image: image("Bunker 42 Moscow underground"),
+      image: "",
       meetingPoint: "Метро Таганская, кольцевая линия",
       latitude: 55.7417,
       longitude: 37.6536,
@@ -398,7 +403,7 @@ async function main() {
         { title: "Бункер-42", lat: 55.7412, lon: 37.6516, note: "Подземный объект холодной войны" }
       ],
       program: ["Встреча на Таганке", "История района и послевоенной Москвы", "Посещение Бункера-42", "Обсуждение инженерных решений и гражданской обороны"],
-      gallery: [image("Moscow Taganka"), image("underground bunker corridor"), image("cold war museum")]
+      gallery: ["", "", ""]
     },
     {
       slug: "hermitage-masterpieces",
@@ -417,7 +422,7 @@ async function main() {
       reviewCount: 240,
       language: "Русский",
       maxGroupSize: 8,
-      image: image("Hermitage Museum Saint Petersburg"),
+      image: "",
       meetingPoint: "Дворцовая площадь, у Александровской колонны",
       latitude: 59.9398,
       longitude: 30.3146,
@@ -427,7 +432,7 @@ async function main() {
         { title: "Европейская живопись", lat: 59.9398, lon: 30.3146, note: "Ключевые произведения маршрута" }
       ],
       program: ["Встреча на Дворцовой площади", "Парадная лестница и залы", "Итальянская и нидерландская живопись", "Финальный блок с вопросами"],
-      gallery: [image("Winter Palace interior"), image("Hermitage gallery hall"), image("Palace Square Saint Petersburg")]
+      gallery: ["", "", ""]
     },
     {
       slug: "peter-paul-fortress-history",
@@ -446,7 +451,7 @@ async function main() {
       reviewCount: 118,
       language: "Русский",
       maxGroupSize: 12,
-      image: image("Peter and Paul Fortress Saint Petersburg"),
+      image: "",
       meetingPoint: "Иоанновский мост",
       latitude: 59.9501,
       longitude: 30.3166,
@@ -456,7 +461,7 @@ async function main() {
         { title: "Невские ворота", lat: 59.9491, lon: 30.3171, note: "Вид на Неву" }
       ],
       program: ["Старт у Иоанновского моста", "Бастионы и план крепости", "Собор и династическая история", "Панорамы Невы и финал маршрута"],
-      gallery: [image("Saint Petersburg fortress"), image("Peter Paul cathedral"), image("Neva river panorama")]
+      gallery: ["", "", ""]
     },
     {
       slug: "night-bridges-canals",
@@ -475,7 +480,7 @@ async function main() {
       reviewCount: 131,
       language: "Русский",
       maxGroupSize: 10,
-      image: image("Saint Petersburg canals drawbridges night"),
+      image: "",
       meetingPoint: "Казанский собор на Невском проспекте",
       latitude: 59.9343,
       longitude: 30.3351,
@@ -485,7 +490,7 @@ async function main() {
         { title: "Дворцовый мост", lat: 59.9416, lon: 30.3086, note: "Точка наблюдения за разводкой" }
       ],
       program: ["Прогулка по Невскому проспекту", "Каналы и набережные", "Исаакиевская площадь", "Финал у Дворцового моста"],
-      gallery: [image("Nevsky Prospekt evening"), image("Saint Petersburg bridge night"), image("Isaac Cathedral night")]
+      gallery: ["", "", ""]
     },
     {
       slug: "peterhof-fountains",
@@ -504,7 +509,7 @@ async function main() {
       reviewCount: 109,
       language: "Русский",
       maxGroupSize: 8,
-      image: image("Peterhof fountains Saint Petersburg"),
+      image: "",
       meetingPoint: "Метро Автово",
       latitude: 59.8845,
       longitude: 29.908,
@@ -514,7 +519,7 @@ async function main() {
         { title: "Большой каскад", lat: 59.8849, lon: 29.9086, note: "Главная точка маршрута" }
       ],
       program: ["Переезд в Петергоф", "Вводная о резиденции", "Нижний парк и фонтаны", "Свободное время и возвращение"],
-      gallery: [image("Peterhof Lower Park"), image("Grand Cascade Peterhof"), image("Peterhof palace garden")]
+      gallery: ["", "", ""]
     },
     {
       slug: "olkhon-baikal-legends",
@@ -533,7 +538,7 @@ async function main() {
       reviewCount: 91,
       language: "Русский",
       maxGroupSize: 6,
-      image: image("Olkhon island Lake Baikal"),
+      image: "",
       meetingPoint: "Поселок Хужир, центральная площадь",
       latitude: 53.1939,
       longitude: 107.3375,
@@ -543,7 +548,7 @@ async function main() {
         { title: "Смотровые бухты Ольхона", lat: 53.2407, lon: 107.401, note: "Панорамы Байкала" }
       ],
       program: ["Сбор в Хужире", "Мыс Бурхан и правила посещения", "Переезды к бухтам и смотровым", "Локальный обед и возвращение"],
-      gallery: [image("Baikal Shaman Rock"), image("Olkhon island cliffs"), image("Lake Baikal panorama")]
+      gallery: ["", "", ""]
     },
     {
       slug: "listvyanka-circum-baikal-railway",
@@ -562,7 +567,7 @@ async function main() {
       reviewCount: 76,
       language: "Русский",
       maxGroupSize: 7,
-      image: image("Listvyanka Circum Baikal Railway"),
+      image: "",
       meetingPoint: "Иркутск, сквер Кирова",
       latitude: 51.8536,
       longitude: 104.8693,
@@ -572,7 +577,7 @@ async function main() {
         { title: "КБЖД", lat: 51.8563, lon: 104.8756, note: "История железной дороги" }
       ],
       program: ["Выезд из Иркутска", "Листвянка и исток Ангары", "Байкальские панорамы", "Блок о Кругобайкальской железной дороге"],
-      gallery: [image("Lake Baikal Listvyanka"), image("Circum Baikal Railway tunnel"), image("Angara river source")]
+      gallery: ["", "", ""]
     },
     {
       slug: "buryatia-ethno-route",
@@ -591,7 +596,7 @@ async function main() {
       reviewCount: 54,
       language: "Русский",
       maxGroupSize: 6,
-      image: image("Buryatia Ivolginsky Datsan"),
+      image: "",
       meetingPoint: "Улан-Удэ, площадь Советов",
       latitude: 51.7586,
       longitude: 107.203,
@@ -601,7 +606,7 @@ async function main() {
         { title: "Этнокультурная площадка", lat: 51.827, lon: 107.606, note: "Традиции и кухня" }
       ],
       program: ["Выезд из Улан-Удэ", "Иволгинский дацан и правила посещения", "Этнокультурный блок", "Возвращение в город"],
-      gallery: [image("Ulan Ude Buryatia"), image("Ivolginsky Datsan temple"), image("Buryat culture")]
+      gallery: ["", "", ""]
     },
     {
       slug: "old-tbilisi-narikala-baths",
@@ -620,7 +625,7 @@ async function main() {
       reviewCount: 143,
       language: "Русский",
       maxGroupSize: 10,
-      image: image("Old Tbilisi Narikala sulfur baths"),
+      image: "",
       meetingPoint: "Площадь Мейдан",
       latitude: 41.6886,
       longitude: 44.8086,
@@ -630,7 +635,7 @@ async function main() {
         { title: "Крепость Нарикала", lat: 41.6886, lon: 44.8086, note: "Панорама города" }
       ],
       program: ["Старые кварталы и дворы", "Серные бани и городские легенды", "Подъем к Нарикале", "Смотровые площадки и финал у канатной дороги"],
-      gallery: [image("Tbilisi old town"), image("Narikala fortress"), image("Tbilisi sulfur baths")]
+      gallery: ["", "", ""]
     },
     {
       slug: "sololaki-rustaveli-architecture",
@@ -649,7 +654,7 @@ async function main() {
       reviewCount: 79,
       language: "Русский",
       maxGroupSize: 8,
-      image: image("Sololaki Tbilisi architecture"),
+      image: "",
       meetingPoint: "Площадь Свободы",
       latitude: 41.6934,
       longitude: 44.8015,
@@ -659,7 +664,7 @@ async function main() {
         { title: "Проспект Руставели", lat: 41.7006, lon: 44.7948, note: "Культурная ось города" }
       ],
       program: ["Площадь Свободы и городская планировка", "Сололаки: фасады и парадные", "Истории жителей района", "Проспект Руставели и театральный квартал"],
-      gallery: [image("Tbilisi Sololaki balconies"), image("Rustaveli Avenue Tbilisi"), image("Tbilisi architecture detail")]
+      gallery: ["", "", ""]
     },
     {
       slug: "mtskheta-day-trip",
@@ -678,7 +683,7 @@ async function main() {
       reviewCount: 65,
       language: "English",
       maxGroupSize: 6,
-      image: image("Mtskheta Jvari Svetitskhoveli"),
+      image: "",
       meetingPoint: "Площадь Свободы, Тбилиси",
       latitude: 41.8412,
       longitude: 44.7209,
@@ -688,7 +693,7 @@ async function main() {
         { title: "Светицховели", lat: 41.842, lon: 44.7209, note: "Собор в центре Мцхеты" }
       ],
       program: ["Выезд из Тбилиси", "Джвари и обзорная площадка", "Собор Светицховели", "Прогулка по Мцхете и возвращение"],
-      gallery: [image("Mtskheta Georgia"), image("Jvari monastery"), image("Svetitskhoveli cathedral")]
+      gallery: ["", "", ""]
     },
     {
       slug: "dubai-burj-khalifa-future",
@@ -707,7 +712,7 @@ async function main() {
       reviewCount: 156,
       language: "English",
       maxGroupSize: 8,
-      image: image("Dubai Burj Khalifa Museum of the Future"),
+      image: "",
       meetingPoint: "Dubai Mall main entrance",
       latitude: 25.1972,
       longitude: 55.2744,
@@ -717,7 +722,7 @@ async function main() {
         { title: "Museum of the Future", lat: 25.2191, lon: 55.2819, note: "Архитектура и город будущего" }
       ],
       program: ["Встреча в Dubai Mall", "Downtown Dubai и Burj Khalifa", "Дубайские фонтаны", "Переезд к Museum of the Future"],
-      gallery: [image("Burj Khalifa Dubai"), image("Dubai Mall fountain"), image("Museum of the Future Dubai")]
+      gallery: ["", "", ""]
     },
     {
       slug: "al-fahidi-dubai-creek",
@@ -736,7 +741,7 @@ async function main() {
       reviewCount: 103,
       language: "Русский",
       maxGroupSize: 10,
-      image: image("Al Fahidi Dubai Creek"),
+      image: "",
       meetingPoint: "Al Fahidi Historical Neighbourhood",
       latitude: 25.2644,
       longitude: 55.2996,
@@ -746,7 +751,7 @@ async function main() {
         { title: "Gold Souk", lat: 25.2697, lon: 55.2962, note: "Торговые кварталы" }
       ],
       program: ["Al Fahidi и традиционная архитектура", "Музейный квартал и кофе-пауза", "Переправа через Dubai Creek", "Рынки Deira и финал маршрута"],
-      gallery: [image("Old Dubai Al Fahidi"), image("Dubai Creek abra"), image("Dubai spice souk")]
+      gallery: ["", "", ""]
     },
     {
       slug: "palm-marina-evening-dubai",
@@ -765,7 +770,7 @@ async function main() {
       reviewCount: 94,
       language: "English",
       maxGroupSize: 7,
-      image: image("Palm Jumeirah Dubai Marina evening"),
+      image: "",
       meetingPoint: "Dubai Marina Mall",
       latitude: 25.0801,
       longitude: 55.1403,
@@ -775,7 +780,7 @@ async function main() {
         { title: "The Pointe", lat: 25.1304, lon: 55.1171, note: "Вечерняя панорама Atlantis" }
       ],
       program: ["Встреча в Dubai Marina", "Променад и архитектура района", "Palm Jumeirah и видовые точки", "Финал у The Pointe"],
-      gallery: [image("Dubai Marina skyline"), image("Palm Jumeirah aerial"), image("Atlantis Dubai evening")]
+      gallery: ["", "", ""]
     },
     {
       slug: "dubai-desert-safari-certified",
@@ -794,7 +799,7 @@ async function main() {
       reviewCount: 121,
       language: "English",
       maxGroupSize: 6,
-      image: image("Dubai desert safari dunes sunset"),
+      image: "",
       meetingPoint: "Hotel pickup inside Dubai",
       latitude: 24.947,
       longitude: 55.592,
@@ -804,18 +809,20 @@ async function main() {
         { title: "Desert camp", lat: 24.95, lon: 55.61, note: "Вечерняя программа" }
       ],
       program: ["Трансфер из отеля", "Инструктаж и выезд к дюнам", "Закат и фото-точки", "Ужин в лагере и возвращение"],
-      gallery: [image("Dubai desert dunes"), image("desert safari jeep Dubai"), image("Arabian desert sunset")]
+      gallery: ["", "", ""]
     }
   ];
 
   for (const tour of tours) {
-    const { guideSlug, route, program, gallery, ...tourData } = tour;
+    const { guideSlug, route, program, ...tourData } = tour;
+    delete (tourData as Record<string, unknown>).gallery;
     await prisma.tour.create({
       data: {
         ...tourData,
+        image: tourAsset(tour.slug, "cover"),
         routeJson: JSON.stringify(route),
         programJson: JSON.stringify(program),
-        galleryJson: JSON.stringify(gallery),
+        galleryJson: JSON.stringify([tourAsset(tour.slug, "route-1"), tourAsset(tour.slug, "route-2")]),
         guideId: guideMap[guideSlug].id
       }
     });
