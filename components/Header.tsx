@@ -31,7 +31,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href="/catalog?certified=true" className="btn-secondary hidden sm:inline-flex">
+          <Link href="/certificates" className="btn-secondary hidden sm:inline-flex">
             <BadgeCheck className="h-4 w-4" />
             Сертификаты
           </Link>
