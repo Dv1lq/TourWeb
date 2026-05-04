@@ -12,6 +12,10 @@ function guideAsset(slug: string) {
   return `/images/guides/${slug}.jpg`;
 }
 
+function image() { // legacy helper for old seed literals
+  return "";
+}
+
 function issued(value: string) {
   return new Date(`${value}T09:00:00.000Z`);
 }
