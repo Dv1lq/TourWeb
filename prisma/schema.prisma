@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id
+  name      String
+  email     String    @unique
+  phone     String
+  city      String
+  createdAt DateTime  @default(now())
+  bookings  Booking[]
+}
+
+model Guide {
+  id                  String   @id @default(cuid())
+  slug                String   @unique
+  name                String
+  photo               String
+  country             String
+  city                String
+  experienceYears     Int
+  specialization      String
+  languages           String
+  rating              Float
+  completedTours      Int
+  certificateNumber   String
+  certificateIssuedAt DateTime
+  certificateIssuer   String
+  bio                 String
+  verified            Boolean  @default(true)
+  tours               Tour[]
+  reviews             Review[]
+}
+
+model Tour {
+  id            String    @id @default(cuid())
+  slug          String    @unique
+  title         String
+  country       String
+  city          String
+  region        String
+  category      String
+  description   String
+  longDescription String
+  price         Int
+  currency      String
+  durationHours Float
+  rating        Float
+  reviewCount   Int
+  language      String
+  maxGroupSize  Int
+  image         String
+  meetingPoint  String
+  latitude      Float
+  longitude     Float
+  routeJson     String
+  programJson   String
+  galleryJson   String
+  guideId       String
+  guide         Guide     @relation(fields: [guideId], references: [id])
+  bookings      Booking[]
+  reviews       Review[]
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userName  String
+  rating    Int
+  text      String
+  createdAt DateTime @default(now())
+  tourId    String?
+  guideId   String?
+  tour      Tour?    @relation(fields: [tourId], references: [id])
+  guide     Guide?   @relation(fields: [guideId], references: [id])
+}
+
+model Booking {
+  id           String   @id @default(cuid())
+  userId       String
+  tourId       String
+  customerName String
+  email        String
+  phone        String
+  date         DateTime
+  people       Int
+  comment      String?
+  totalPrice   Int
+  status       String   @default("confirmed")
+  createdAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id])
+  tour         Tour     @relation(fields: [tourId], references: [id])
+}
+
+model City {
+  id        String @id @default(cuid())
+  country   String
+  name      String
+  region    String
+  latitude  Float
+  longitude Float
+}
