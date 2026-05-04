@@ -1,4 +1,5 @@
 import type { BookingView, CityView, GuideSummary, ReviewView, RoutePoint, TourView } from "@/lib/types";
+import { TOUR_IMAGE_FALLBACK, resolveTourAssets } from "@/lib/tour-assets";
 import { parseJson } from "@/lib/utils";
 
 type RawDate = Date | string;
@@ -123,6 +124,10 @@ export function serializeGuide(guide: RawGuide): GuideSummary {
 }
 
 export function serializeTour(tour: RawTour): TourView {
+  const parsedRoute = parseJson<RoutePoint[]>(tour.routeJson, []);
+  const parsedGallery = parseJson<string[]>(tour.galleryJson, []);
+  const resolvedAssets = resolveTourAssets(tour.slug, tour.image || TOUR_IMAGE_FALLBACK, parsedGallery);
+
   return {
     id: tour.id,
     slug: tour.slug,
@@ -140,15 +145,15 @@ export function serializeTour(tour: RawTour): TourView {
     reviewCount: tour.reviewCount,
     language: tour.language,
     maxGroupSize: tour.maxGroupSize,
-    image: tour.image,
+    image: resolvedAssets.image,
     meetingPoint: tour.meetingPoint,
     latitude: tour.latitude,
     longitude: tour.longitude,
-    route: parseJson<RoutePoint[]>(tour.routeJson, []),
+    route: parsedRoute,
     coordinates: { lat: tour.latitude, lng: tour.longitude },
-    routePoints: parseJson<RoutePoint[]>(tour.routeJson, []).map((p) => ({ title: p.title, lat: p.lat, lng: p.lon })),
+    routePoints: parsedRoute.map((p) => ({ title: p.title, lat: p.lat, lng: p.lon })),
     program: parseJson<string[]>(tour.programJson, []),
-    gallery: parseJson<string[]>(tour.galleryJson, []),
+    gallery: resolvedAssets.gallery,
     guide: serializeGuide(tour.guide),
     reviews: tour.reviews?.map(serializeReview)
   };
