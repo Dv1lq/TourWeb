@@ -5,6 +5,7 @@ import { CertificateBadge } from "@/components/CertificateBadge";
 import { Rating } from "@/components/Rating";
 import dynamic from "next/dynamic";
 import { WeatherWidget } from "@/components/WeatherWidget";
+import { TourMapSection } from "@/components/TourMapSection";
 import { prisma } from "@/lib/prisma";
 import { serializeTour } from "@/lib/serializers";
 import { formatDate, formatDuration, formatMoney } from "@/lib/utils";
