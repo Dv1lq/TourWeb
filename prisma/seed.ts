@@ -12,6 +12,10 @@ function guideAsset(slug: string) {
   return `/images/guides/${slug}.jpg`;
 }
 
+function image() { // legacy helper for old seed literals
+  return "";
+}
+
 function issued(value: string) {
   return new Date(`${value}T09:00:00.000Z`);
 }
@@ -58,7 +62,7 @@ async function main() {
       rating: 4.9,
       completedTours: 1240,
       certificateNumber: "РТ-ГИД-2021-0448",
-      certificateIssuedAt: issued("2021-04-18"),
+      certificateIssuedAt: issued("2021-04-10"),
       certificateIssuer: "Государственный комитет Республики Татарстан по туризму",
       bio: "Проводит авторские маршруты по Казанскому кремлю, Старо-Татарской слободе и объектам ЮНЕСКО. Делает акцент на проверенных исторических источниках и комфортном темпе группы."
     },
@@ -74,8 +78,8 @@ async function main() {
       rating: 4.8,
       completedTours: 860,
       certificateNumber: "РТ-ЭКО-2022-0191",
-      certificateIssuedAt: issued("2022-06-11"),
-      certificateIssuer: "Ассоциация гидов-переводчиков Татарстана",
+      certificateIssuedAt: issued("2022-06-03"),
+      certificateIssuer: "Ассоциация экскурсоводов Республики Татарстан",
       bio: "Специализируется на маршрутах к Голубым озерам, Свияжску и Раифскому монастырю. Следит за безопасностью на природных участках и заранее проверяет логистику."
     },
     {
@@ -90,8 +94,8 @@ async function main() {
       rating: 4.95,
       completedTours: 1515,
       certificateNumber: "МСК-ИСК-2020-1120",
-      certificateIssuedAt: issued("2020-10-02"),
-      certificateIssuer: "Комитет по туризму города Москвы",
+      certificateIssuedAt: issued("2020-09-18"),
+      certificateIssuer: "Департамент культуры города Москвы",
       bio: "Искусствовед и аккредитованный московский экскурсовод. Помогает увидеть знакомые музеи и площади через детали, которые обычно остаются вне маршрута."
     },
     {
@@ -106,8 +110,8 @@ async function main() {
       rating: 4.82,
       completedTours: 930,
       certificateNumber: "МСК-ГИД-2022-0317",
-      certificateIssuedAt: issued("2022-03-21"),
-      certificateIssuer: "Мостуризм",
+      certificateIssuedAt: issued("2022-02-12"),
+      certificateIssuer: "Московская ассоциация гидов-переводчиков",
       bio: "Ведет маршруты по ВДНХ, Останкино, Коломенскому и Бункеру-42. Сочетает факты, архивные материалы и понятный рассказ без перегруза датами."
     },
     {
@@ -122,8 +126,8 @@ async function main() {
       rating: 4.97,
       completedTours: 1740,
       certificateNumber: "СПБ-МУЗ-2019-0822",
-      certificateIssuedAt: issued("2019-09-15"),
-      certificateIssuer: "Санкт-Петербургский туристско-информационный центр",
+      certificateIssuedAt: issued("2019-05-14"),
+      certificateIssuer: "Комитет по развитию туризма Санкт-Петербурга",
       bio: "Профессиональный музейный гид. Строит экскурсии по Эрмитажу так, чтобы группа понимала логику коллекций, а не просто проходила от шедевра к шедевру."
     },
     {
@@ -138,8 +142,8 @@ async function main() {
       rating: 4.86,
       completedTours: 1190,
       certificateNumber: "СПБ-ГИД-2021-0506",
-      certificateIssuedAt: issued("2021-05-06"),
-      certificateIssuer: "Ассоциация профессиональных гидов Санкт-Петербурга",
+      certificateIssuedAt: issued("2021-08-07"),
+      certificateIssuer: "Туристско-информационное бюро Санкт-Петербурга",
       bio: "Проводит прогулки по Петропавловской крепости, Невскому проспекту и ночным мостам. Умеет адаптировать сложную архитектурную тему для семейных групп."
     },
     {
@@ -154,8 +158,8 @@ async function main() {
       rating: 4.91,
       completedTours: 980,
       certificateNumber: "БКЛ-ЭКО-2018-0074",
-      certificateIssuedAt: issued("2018-07-30"),
-      certificateIssuer: "Байкальская ассоциация гидов и инструкторов",
+      certificateIssuedAt: issued("2018-07-22"),
+      certificateIssuer: "Ассоциация гидов Байкальского региона",
       bio: "Организует маршруты по Ольхону, Листвянке, КБЖД и Бурятии. Делает упор на ответственное посещение природных территорий и местные традиции."
     },
     {
@@ -170,7 +174,7 @@ async function main() {
       rating: 4.88,
       completedTours: 1035,
       certificateNumber: "GTA-TBS-2021-209",
-      certificateIssuedAt: issued("2021-03-09"),
+      certificateIssuedAt: issued("2021-03-16"),
       certificateIssuer: "Georgian Tourism Association",
       bio: "Рассказывает о Тбилиси через дворы, балконы, серные бани и старые городские семьи. Хорошо знает маршруты для первого знакомства и повторных поездок."
     },
@@ -186,7 +190,7 @@ async function main() {
       rating: 4.84,
       completedTours: 1120,
       certificateNumber: "DTCM-LG-2020-5831",
-      certificateIssuedAt: issued("2020-11-12"),
+      certificateIssuedAt: issued("2020-11-25"),
       certificateIssuer: "Dubai Department of Economy and Tourism",
       bio: "Лицензированный гид Дубая с опытом городских и пустынных программ. Следит за таймингом, погодой и комфортом группы в жарком климате."
     }
@@ -809,13 +813,14 @@ async function main() {
   ];
 
   for (const tour of tours) {
-    const { guideSlug, route, program, gallery, ...tourData } = tour;
+    const { guideSlug, route, program, ...tourData } = tour;
     await prisma.tour.create({
       data: {
         ...tourData,
+        image: tourAsset(tour.slug, "cover"),
         routeJson: JSON.stringify(route),
         programJson: JSON.stringify(program),
-        galleryJson: JSON.stringify(gallery),
+        galleryJson: JSON.stringify([tourAsset(tour.slug, "route-1"), tourAsset(tour.slug, "route-2")]),
         guideId: guideMap[guideSlug].id
       }
     });
