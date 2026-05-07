@@ -11,7 +11,12 @@
     "db:generate": "prisma generate",
     "db:push": "prisma generate && tsx prisma/create-db.ts",
     "db:seed": "tsx prisma/seed.ts",
-    "db:reset": "prisma generate && tsx prisma/create-db.ts --reset && tsx prisma/seed.ts"
+    "db:reset": "prisma generate && tsx prisma/create-db.ts --reset && tsx prisma/seed.ts",
+    "verify:tour-assets": "tsx scripts/verify-tour-assets.ts",
+    "verify-tour-assets": "tsx scripts/verify-tour-assets.ts",
+    "predev": "prisma generate",
+    "prestart": "prisma generate",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
