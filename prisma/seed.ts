@@ -1,5 +1,6 @@
 import path from "node:path";
 import { PrismaClient } from "@prisma/client";
+import { TOUR_ASSETS_BY_SLUG } from "../lib/tour-assets";
 
 const databaseUrl = process.env.DATABASE_URL ?? `file:${path.join(process.cwd(), "prisma", "dev.db")}`;
 
@@ -17,9 +18,6 @@ function guideAsset(slug: string) {
   return `/images/guides/${slug}.jpg`;
 }
 
-function image() { // legacy helper for old seed literals
-  return "";
-}
 
 function issued(value: string) {
   return new Date(`${value}T09:00:00.000Z`);
@@ -823,10 +821,10 @@ async function main() {
     await prisma.tour.create({
       data: {
         ...tourData,
-        image: tourAsset(tour.slug, "cover"),
+        image: TOUR_ASSETS_BY_SLUG[tour.slug]?.image ?? tourAsset(tour.slug, "cover"),
         routeJson: JSON.stringify(route),
         programJson: JSON.stringify(program),
-        galleryJson: JSON.stringify([tourAsset(tour.slug, "route-1"), tourAsset(tour.slug, "route-2")]),
+        galleryJson: JSON.stringify(TOUR_ASSETS_BY_SLUG[tour.slug]?.gallery ?? [tourAsset(tour.slug, "route-1"), tourAsset(tour.slug, "route-2")]),
         guideId: guideMap[guideSlug].id
       }
     });
