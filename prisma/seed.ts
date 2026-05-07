@@ -832,47 +832,75 @@ async function main() {
 
   const tourMap = Object.fromEntries((await prisma.tour.findMany()).map((tour) => [tour.slug, tour]));
 
-  const reviews = [
-    ["kazan-kremlin-kul-sharif", "aigul-safina", "Ольга Петрова", 5, "Айгуль провела маршрут спокойно и очень содержательно. Особенно понравился блок про сочетание культур в кремле."],
-    ["kazan-kremlin-kul-sharif", "aigul-safina", "Илья Соколов", 5, "Хорошая структура экскурсии, не было ощущения перегруза датами."],
-    ["sviyazhsk-raifa-day-trip", "timur-galeev", "Марина Громова", 5, "Свияжск оказался гораздо интереснее, чем ожидали. Трансфер и тайминг без сбоев."],
-    ["blue-lakes-temple-all-religions", "timur-galeev", "Антон Беляев", 4, "Красивые места, гид заранее предупредил про обувь и погоду."],
-    ["moscow-red-square-kremlin", "maria-volkova", "Елена Ершова", 5, "Мария умеет показывать знакомые места так, будто видишь их впервые."],
-    ["moscow-red-square-kremlin", "maria-volkova", "Даниил Морозов", 5, "Отличный вариант для гостей Москвы. Много деталей про башни и площадь."],
-    ["tretyakov-gallery-art", "maria-volkova", "Светлана Ким", 5, "Лучший музейный маршрут за последнее время. Все картины связались в понятную историю."],
-    ["vdnh-ostankino-soviet-modern", "alexey-orlov", "Роман Андреев", 4, "ВДНХ с таким объяснением воспринимается совсем иначе. Хотелось бы еще полчаса на павильоны."],
-    ["bunker-42-underground-moscow", "alexey-orlov", "Кирилл Захаров", 5, "Сильная тема и хороший баланс между фактами и городскими историями."],
-    ["hermitage-masterpieces", "ekaterina-lebedeva", "Наталья Волкова", 5, "Екатерина построила маршрут очень логично. Даже подросткам было интересно."],
-    ["hermitage-masterpieces", "ekaterina-lebedeva", "Павел Руднев", 5, "Понравилось, что экскурсия не была гонкой по залам."],
-    ["peter-paul-fortress-history", "dmitry-kovalev", "Алиса Титова", 5, "Дмитрий отлично объясняет план крепости и историю города."],
-    ["night-bridges-canals", "dmitry-kovalev", "Виктория Лазарева", 4, "Маршрут атмосферный, мосты посмотрели с хорошей точки."],
-    ["peterhof-fountains", "ekaterina-lebedeva", "Сергей Лапин", 5, "Петергоф удобнее смотреть с гидом: стало понятно, как устроены фонтаны."],
-    ["olkhon-baikal-legends", "artem-buryatov", "Ирина Кузнецова", 5, "Очень бережный подход к Байкалу и местным традициям. Ольхон впечатлил."],
-    ["listvyanka-circum-baikal-railway", "artem-buryatov", "Максим Чернов", 5, "КБЖД стала главным открытием поездки. Логистика четкая."],
-    ["buryatia-ethno-route", "artem-buryatov", "Анна Серова", 5, "Было спокойно, уважительно и очень познавательно. Хорошо объяснили правила посещения дацана."],
-    ["old-tbilisi-narikala-baths", "nino-chavchavadze", "Екатерина Яковлева", 5, "Нино показывает город через людей и истории домов. Очень теплый маршрут."],
-    ["old-tbilisi-narikala-baths", "nino-chavchavadze", "Михаил Абрамов", 5, "После экскурсии стало проще ориентироваться в Старом Тбилиси."],
-    ["sololaki-rustaveli-architecture", "nino-chavchavadze", "Лаура Меликян", 5, "Сололаки с Нино — это настоящий городской архив."],
-    ["mtskheta-day-trip", "nino-chavchavadze", "Peter Lewis", 5, "Clear English tour, great timing and beautiful views from Jvari."],
-    ["dubai-burj-khalifa-future", "omar-al-mansouri", "Alex Parker", 5, "Omar connected the skyline with real urban planning context. Very professional."],
-    ["al-fahidi-dubai-creek", "omar-al-mansouri", "Егор Никитин", 5, "Старый Дубай оказался самым интересным днем поездки."],
-    ["palm-marina-evening-dubai", "omar-al-mansouri", "Sofia Mendes", 4, "Beautiful evening route and comfortable pace."],
-    ["dubai-desert-safari-certified", "omar-al-mansouri", "Никита Воронин", 5, "Понравилось, что безопасность объяснили до выезда на дюны."],
-    ["dubai-desert-safari-certified", "omar-al-mansouri", "Julia Weber", 5, "The safari felt organized and safe, sunset stop was excellent."]
-  ] as const;
+  const themedReviewSnippets: Record<string, string[]> = {
+    "peterhof-fountains": [
+      "Фонтаны Петергофа и Нижний парк увидели в удобном темпе, рассказ про дворец был очень живой.",
+      "Отлично продуман маршрут по парку: фонтаны, аллеи и история резиденции сложились в цельную картину."
+    ],
+    "bunker-42-underground-moscow": [
+      "Подземные коридоры и атмосфера холодной войны действительно впечатляют.",
+      "Маршрут по Бункеру-42 получился насыщенным: техника, история объекта и сильная подача материала."
+    ],
+    "old-tbilisi-narikala-baths": [
+      "Старый Тбилиси раскрылся через дворики, крепость Нарикала и серные бани.",
+      "Очень атмосферная прогулка по историческим кварталам и панорамным точкам города."
+    ],
+    "dubai-burj-khalifa-future": [
+      "Понравился контраст между инженерными решениями Downtown и видами у Burj Khalifa.",
+      "Экскурсия помогла понять, как формировался современный район вокруг башни."
+    ]
+  };
 
-  for (let index = 0; index < reviews.length; index += 1) {
-    const [tourSlug, guideSlug, userName, rating, text] = reviews[index];
-    await prisma.review.create({
+  const baseReviewAuthors = [
+    "Ольга Петрова",
+    "Илья Соколов",
+    "Марина Громова",
+    "Антон Беляев",
+    "Елена Ершова",
+    "Даниил Морозов",
+    "Светлана Ким"
+  ];
+
+  const baseRatings = [5, 5, 5, 4, 5, 5, 4];
+
+  let reviewIndex = 0;
+  for (const tour of await prisma.tour.findMany({ include: { guide: true } })) {
+    const snippets = themedReviewSnippets[tour.slug] ?? [
+      `Маршрут «${tour.title}» получился очень содержательным: понятная логистика и хороший темп.`,
+      `Особенно понравилось, как гид раскрыл тему экскурсии и ответил на вопросы по маршруту.`
+    ];
+
+    for (let i = 0; i < 6; i += 1) {
+      const author = baseReviewAuthors[i % baseReviewAuthors.length];
+      const text = snippets[i % snippets.length];
+      const rating = baseRatings[i % baseRatings.length];
+      await prisma.review.create({
+        data: {
+          userName: author,
+          rating,
+          text,
+          createdAt: new Date(Date.UTC(2025, (reviewIndex + i) % 12, 2 + ((reviewIndex + i) % 26), 10, 0, 0)),
+          tourId: tour.id,
+          guideId: tour.guideId
+        }
+      });
+    }
+
+    const aggregates = await prisma.review.aggregate({
+      where: { tourId: tour.id },
+      _count: { _all: true },
+      _avg: { rating: true }
+    });
+
+    await prisma.tour.update({
+      where: { id: tour.id },
       data: {
-        userName,
-        rating,
-        text,
-        createdAt: new Date(Date.UTC(2025, index % 12, 4 + index, 10, 0, 0)),
-        tourId: tourMap[tourSlug].id,
-        guideId: guideMap[guideSlug].id
+        reviewCount: aggregates._count._all,
+        rating: Number((aggregates._avg.rating ?? tour.rating).toFixed(2))
       }
     });
+
+    reviewIndex += 6;
   }
 
   await prisma.booking.create({
