@@ -72,6 +72,7 @@ async function main() {
       { country: "Китай", name: "Мутяньюй", region: "Пекин / Мутяньюй", latitude: 40.4319, longitude: 116.5704 },
       { country: "Китай", name: "Шанхай", region: "Шанхай", latitude: 31.2304, longitude: 121.4737 },
       { country: "Китай", name: "Сиань", region: "Шэньси", latitude: 34.3416, longitude: 108.9398 }
+      { country: "Япония", name: "Киото", region: "Кансай", latitude: 35.0116, longitude: 135.7681 }
     ]
   });
 
@@ -1126,6 +1127,7 @@ async function main() {
       route: [{ title: "Терракотовая армия", lat: 34.3853, lon: 109.2732, note: "Археологический музей" }, { title: "Городская стена Сианя", lat: 34.2658, lon: 108.9552, note: "Древний оборонительный периметр" }, { title: "Мусульманский квартал", lat: 34.2655, lon: 108.9471, note: "Исторический торговый район" }],
       program: ["Выезд к Терракотовой армии", "Музейный блок и история находки", "Возвращение в центр Сианя", "Городская стена и мусульманский квартал"], gallery: [], usePlaceholderAssets: true
     }
+      program: ["Встреча у Фусими Инари", "Переезд к Кинкаку-дзи", "Прогулка по Гиону", "Традиционные улицы и чайные дома"], gallery: [], usePlaceholderAssets: true }
   ];
 
   for (const tour of tours) {
