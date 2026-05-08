@@ -1125,7 +1125,7 @@ async function main() {
       slug: "xian-terracotta-ancient-capital", guideSlug: "chen-mei", title: "Сиань: Терракотовая армия и древняя столица", country: "Китай", city: "Сиань", region: "Шэньси", category: "Историческая / Музейная", description: "Историческая программа по Сианю с Терракотовой армией и стенами древней столицы.", longDescription: "Маршрут включает один из главных археологических памятников Китая и ключевые точки старого Сианя. Экскурсия выстроена так, чтобы увидеть и музейный комплекс, и городское наследие древней столицы.", price: 1180, currency: "CNY", durationHours: 6, rating: 4.94, reviewCount: 53, language: "Chinese, English", maxGroupSize: 10, image: GUIDE_PLACEHOLDER, meetingPoint: "Xi'an Bell Tower Metro Exit", latitude: 34.3416, longitude: 108.9398,
       route: [{ title: "Терракотовая армия", lat: 34.3853, lon: 109.2732, note: "Археологический музей" }, { title: "Городская стена Сианя", lat: 34.2658, lon: 108.9552, note: "Древний оборонительный периметр" }, { title: "Мусульманский квартал", lat: 34.2655, lon: 108.9471, note: "Исторический торговый район" }],
       program: ["Выезд к Терракотовой армии", "Музейный блок и история находки", "Возвращение в центр Сианя", "Городская стена и мусульманский квартал"], gallery: [], usePlaceholderAssets: true
-    }
+    },
   ];
 
   for (const tour of tours) {
