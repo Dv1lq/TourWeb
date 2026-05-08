@@ -51,7 +51,17 @@ async function main() {
       { country: "Россия", name: "Санкт-Петербург", region: "Санкт-Петербург", latitude: 59.9343, longitude: 30.3351 },
       { country: "Россия", name: "Байкал", region: "Иркутская область и Республика Бурятия", latitude: 53.5587, longitude: 108.165 },
       { country: "Грузия", name: "Тбилиси", region: "Тбилиси и Мцхета-Мтианети", latitude: 41.7151, longitude: 44.8271 },
-      { country: "ОАЭ", name: "Дубай", region: "Эмират Дубай", latitude: 25.2048, longitude: 55.2708 }
+      { country: "ОАЭ", name: "Дубай", region: "Эмират Дубай", latitude: 25.2048, longitude: 55.2708 },
+      { country: "Швейцария", name: "Цюрих", region: "Кантон Цюрих", latitude: 47.3769, longitude: 8.5417 },
+      { country: "Швейцария", name: "Люцерн", region: "Кантон Люцерн", latitude: 47.0502, longitude: 8.3093 },
+      { country: "Швейцария", name: "Интерлакен", region: "Кантон Берн", latitude: 46.6863, longitude: 7.8632 },
+      { country: "Швейцария", name: "Женева", region: "Кантон Женева", latitude: 46.2044, longitude: 6.1432 },
+      { country: "Германия", name: "Берлин", region: "Берлин", latitude: 52.52, longitude: 13.405 },
+      { country: "Германия", name: "Мюнхен", region: "Бавария", latitude: 48.1351, longitude: 11.582 },
+      { country: "Германия", name: "Нойшванштайн", region: "Бавария", latitude: 47.5576, longitude: 10.7498 },
+      { country: "Германия", name: "Дрезден", region: "Саксония", latitude: 51.0504, longitude: 13.7373 },
+      { country: "Япония", name: "Токио", region: "Токио", latitude: 35.6762, longitude: 139.6503 },
+      { country: "Япония", name: "Киото", region: "Кансай", latitude: 35.0116, longitude: 135.7681 }
     ]
   });
 
@@ -960,18 +970,114 @@ async function main() {
       program: ["Трансфер из отеля", "Инструктаж и выезд к дюнам", "Закат и фото-точки", "Ужин в лагере и возвращение"],
       gallery: ["", "", ""]
     }
+
+,
+    {
+      slug: "zurich-old-town-limmat",
+      guideSlug: "lukas-meier",
+      title: "Старый Цюрих и набережная Лиммата",
+      country: "Швейцария",
+      city: "Цюрих",
+      region: "Кантон Цюрих",
+      category: "Обзорная / Историческая",
+      description: "Прогулка по историческому центру Цюриха с ключевыми храмами и элегантной улицей Bahnhofstrasse.",
+      longDescription: "Экскурсия охватывает старые кварталы Цюриха, где сохранились средневековые улицы и гильдейские дома, а затем выходит к набережной Лиммата и современной деловой оси города. Маршрут подойдет для первого знакомства с Цюрихом и его архитектурными контрастами.",
+      price: 95,
+      currency: "CHF",
+      durationHours: 3,
+      rating: 4.9,
+      reviewCount: 58,
+      language: "Deutsch, English",
+      maxGroupSize: 10,
+      image: GUIDE_PLACEHOLDER,
+      meetingPoint: "Paradeplatz, Zurich",
+      latitude: 47.3769,
+      longitude: 8.5417,
+      route: [
+        { title: "Старый город (Altstadt)", lat: 47.3722, lon: 8.5426, note: "Узкие улицы и старые дома" },
+        { title: "Гроссмюнстер", lat: 47.3701, lon: 8.5441, note: "Один из символов Цюриха" },
+        { title: "Фраумюнстер", lat: 47.3698, lon: 8.5402, note: "Витражи и история монастыря" },
+        { title: "Bahnhofstrasse", lat: 47.3733, lon: 8.5392, note: "Главная прогулочная улица" }
+      ],
+      program: ["Встреча на Paradeplatz и вводный блок", "Прогулка по Altstadt", "Гроссмюнстер и Фраумюнстер", "Набережная Лиммата и Bahnhofstrasse"],
+      gallery: [],
+      usePlaceholderAssets: true
+    },
+    {
+      slug: "lucerne-kapelbrucke-alps",
+      guideSlug: "lukas-meier",
+      title: "Люцерн, мост Капельбрюкке и виды на Альпы",
+      country: "Швейцария",
+      city: "Люцерн",
+      region: "Кантон Люцерн",
+      category: "Обзорная / Природная",
+      description: "Классический маршрут по Люцерну: деревянный мост Капельбрюкке, старый центр и озерные панорамы.",
+      longDescription: "Во время экскурсии гости увидят визитные карточки Люцерна и узнают, как город развивался на стыке торговых путей и альпийских маршрутов. Программа сочетает городскую архитектуру, памятники и живописные виды на озеро Люцерн.",
+      price: 110,
+      currency: "CHF",
+      durationHours: 4,
+      rating: 4.88,
+      reviewCount: 47,
+      language: "Deutsch, English",
+      maxGroupSize: 10,
+      image: GUIDE_PLACEHOLDER,
+      meetingPoint: "Kapellplatz, Luzern",
+      latitude: 47.0502,
+      longitude: 8.3093,
+      route: [
+        { title: "Капельбрюкке", lat: 47.0517, lon: 8.3078, note: "Средневековый деревянный мост" },
+        { title: "Старый город Люцерна", lat: 47.0511, lon: 8.3057, note: "Площади и расписные фасады" },
+        { title: "Львиный монумент", lat: 47.0579, lon: 8.3124, note: "Памятник швейцарской гвардии" },
+        { title: "Набережная озера Люцерн", lat: 47.0495, lon: 8.3116, note: "Панорама Альп" }
+      ],
+      program: ["Встреча у Kapellplatz", "Капельбрюкке и Старый город", "Львиный монумент", "Прогулка у озера и обзор Альп"],
+      gallery: [],
+      usePlaceholderAssets: true
+    },
+    {
+      slug: "interlaken-bernese-alps-panorama", "guideSlug": "anna-keller", "title": "Интерлакен и панорамы Бернских Альп", "country": "Швейцария", "city": "Интерлакен", "region": "Кантон Берн", "category": "Природная", "description": "Альпийский маршрут с обзорными площадками и видами на озёра Тун и Бриенц.", "longDescription": "Экскурсия знакомит с Интерлакеном как горной базой региона Юнгфрау и дает сбалансированный маршрут между городом и природными точками. Участники увидят панорамы Бернских Альп, озера и ключевые фотолокации.", "price": 150, "currency": "CHF", "durationHours": 6, "rating": 4.92, "reviewCount": 39, "language": "Deutsch, English", "maxGroupSize": 8, "image": GUIDE_PLACEHOLDER, "meetingPoint": "Interlaken Ost", "latitude": 46.6863, "longitude": 7.8632,
+      route: [ { title: "Interlaken Ost", lat: 46.6857, lon: 7.8699, note: "Старт маршрута" }, { title: "Harder Kulm Viewpoint", lat: 46.6986, lon: 7.8552, note: "Панорама Альп" }, { title: "Озеро Тун (панорама)", lat: 46.6949, lon: 7.8022, note: "Виды на западное озеро" }, { title: "Озеро Бриенц (панорама)", lat: 46.7295, lon: 7.9603, note: "Виды на восточное озеро" }],
+      program: ["Встреча в Interlaken Ost", "Подъем к обзорной площадке", "Панорамы озера Тун", "Переезд к точкам на озере Бриенц"], gallery: [], usePlaceholderAssets: true },
+    {
+      slug: "geneva-international-old-town", guideSlug: "anna-keller", title: "Женева: международный квартал и старый город", country: "Швейцария", city: "Женева", region: "Кантон Женева", category: "Обзорная / Авторская", description: "Маршрут по озеру, старым кварталам и району международных организаций Женевы.", longDescription: "Экскурсия показывает Женеву как город дипломатии и исторического наследия. В программе прогулка по набережной, старому центру и кварталам, связанным с международными институтами.", price: 120, currency: "CHF", durationHours: 3.5, rating: 4.87, reviewCount: 42, language: "Français, English", maxGroupSize: 10, image: GUIDE_PLACEHOLDER, meetingPoint: "Jardin Anglais", latitude: 46.2044, longitude: 6.1432,
+      route: [ { title: "Женевское озеро", lat: 46.2071, lon: 6.1538, note: "Набережная и вид на Jet d’Eau" }, { title: "Jet d’Eau", lat: 46.2073, lon: 6.1554, note: "Символ Женевы" }, { title: "Старый город", lat: 46.2018, lon: 6.1481, note: "Исторические улицы" }, { title: "Собор Святого Петра", lat: 46.2011, lon: 6.1484, note: "Главный храм старой Женевы" }, { title: "Квартал ООН", lat: 46.2266, lon: 6.1402, note: "Дипломатический район" }],
+      program: ["Встреча у Женевского озера", "Jet d’Eau и история города", "Старый город и собор Святого Петра", "Международный квартал"], gallery: [], usePlaceholderAssets: true },
+    {
+      slug: "berlin-xx-century-traces", guideSlug: "hans-muller", title: "Берлин: Бранденбургские ворота и следы XX века", country: "Германия", city: "Берлин", region: "Берлин", category: "Историческая", description: "Интенсивная прогулка по ключевым местам памяти Берлина XX века.", longDescription: "Маршрут объединяет символы Берлина и важные точки, связанные с событиями XX века. Экскурсия помогает собрать целостную картину городской истории без перегруза деталями.", price: 85, currency: "EUR", durationHours: 3, rating: 4.93, reviewCount: 76, language: "Deutsch, English", maxGroupSize: 12, image: GUIDE_PLACEHOLDER, meetingPoint: "Brandenburg Gate", latitude: 52.52, longitude: 13.405,
+      route: [ { title: "Бранденбургские ворота", lat: 52.5163, lon: 13.3777, note: "Старт" }, { title: "Рейхстаг", lat: 52.5186, lon: 13.3762, note: "Парламент Германии" }, { title: "Мемориал Холокоста", lat: 52.5139, lon: 13.3787, note: "Мемориальный комплекс" }, { title: "Berlin Wall Memorial", lat: 52.5351, lon: 13.3903, note: "Следы стены" }, { title: "Checkpoint Charlie", lat: 52.5076, lon: 13.3904, note: "Пограничный пункт" }],
+      program: ["Бранденбургские ворота и введение", "Рейхстаг и правительственный квартал", "Мемориалы XX века", "Финал у Checkpoint Charlie"], gallery: [], usePlaceholderAssets: true },
+    {
+      slug: "munich-marienplatz-bavarian-traditions", guideSlug: "sophie-schneider", title: "Мюнхен: старый город, Мариенплац и баварские традиции", country: "Германия", city: "Мюнхен", region: "Бавария", category: "Обзорная / Гастрономическая", description: "Прогулка по историческому центру Мюнхена с акцентом на городские традиции и рынки.", longDescription: "Экскурсия сочетает обзор центральных площадей и гастрономическую составляющую, знакомя гостей с локальной культурой Баварии. Подойдет для первого дня в Мюнхене.", price: 95, currency: "EUR", durationHours: 3.5, rating: 4.86, reviewCount: 61, language: "Deutsch, English", maxGroupSize: 10, image: GUIDE_PLACEHOLDER, meetingPoint: "Marienplatz", latitude: 48.1351, longitude: 11.582,
+      route: [ { title: "Мариенплац", lat: 48.1374, lon: 11.5755, note: "Сердце старого города" }, { title: "Новая ратуша", lat: 48.1371, lon: 11.5754, note: "Готический фасад" }, { title: "Виктуалиенмаркт", lat: 48.1351, lon: 11.576, note: "Гастрономический рынок" }, { title: "Хофбройхаус", lat: 48.1375, lon: 11.5796, note: "Баварские традиции" }],
+      program: ["Встреча на Мариенплац", "Старый центр и ратуша", "Виктуалиенмаркт", "Финал в районе Хофбройхаус"], gallery: [], usePlaceholderAssets: true },
+    {
+      slug: "neuschwanstein-romantic-bavaria", guideSlug: "sophie-schneider", title: "Замок Нойшванштайн и романтическая Бавария", country: "Германия", city: "Нойшванштайн", region: "Бавария", category: "Выездная / Историческая", description: "Выездная программа к Нойшванштайну с альпийскими видами и деревней Хоэншвангау.", longDescription: "Маршрут рассчитан на целый день и включает комфортный трансфер, обзор окрестностей замка и исторический контекст Баварии XIX века. Экскурсия для любителей замковой архитектуры и горных пейзажей.", price: 165, currency: "EUR", durationHours: 8, rating: 4.91, reviewCount: 54, language: "Deutsch, English", maxGroupSize: 8, image: GUIDE_PLACEHOLDER, meetingPoint: "Hohenschwangau Ticket Center", latitude: 47.5576, longitude: 10.7498,
+      route: [ { title: "Hohenschwangau", lat: 47.5566, lon: 10.7397, note: "Старт у подножия" }, { title: "Замок Нойшванштайн", lat: 47.5576, lon: 10.7498, note: "Главная точка" }, { title: "Marienbrücke", lat: 47.5574, lon: 10.749, note: "Панорама замка" }],
+      program: ["Сбор и трансфер", "Подход к замку и исторический блок", "Панорамы Альп и Хоэншвангау", "Возвращение"], gallery: [], usePlaceholderAssets: true },
+    {
+      slug: "dresden-baroque-old-masters", guideSlug: "hans-muller", title: "Дрезден: барочный центр и Галерея старых мастеров", country: "Германия", city: "Дрезден", region: "Саксония", category: "Музейная / Историческая", description: "Исторический центр Дрездена и ключевые объекты художественного наследия города.", longDescription: "Экскурсия соединяет прогулку по барочному центру и посещение важнейших музейных точек Дрездена. Подходит для путешественников, которым интересны архитектура и живопись старых мастеров.", price: 90, currency: "EUR", durationHours: 4, rating: 4.84, reviewCount: 45, language: "Deutsch, English", maxGroupSize: 10, image: GUIDE_PLACEHOLDER, meetingPoint: "Theaterplatz, Dresden", latitude: 51.0504, longitude: 13.7373,
+      route: [ { title: "Цвингер", lat: 51.0524, lon: 13.7364, note: "Барочный ансамбль" }, { title: "Фрауэнкирхе", lat: 51.051, lon: 13.7416, note: "Символ восстановления Дрездена" }, { title: "Набережная Эльбы", lat: 51.0542, lon: 13.7419, note: "Вид на старый город" }, { title: "Галерея старых мастеров", lat: 51.0528, lon: 13.7352, note: "Музейный блок" }],
+      program: ["Встреча на Theaterplatz", "Цвингер и барочный квартал", "Фрауэнкирхе и набережная", "Галерея старых мастеров"], gallery: [], usePlaceholderAssets: true },
+    {
+      slug: "tokyo-asakusa-shibuya-metropolis", guideSlug: "haruto-tanaka", title: "Токио: Асакуса, Сибуя и современный мегаполис", country: "Япония", city: "Токио", region: "Токио", category: "Обзорная", description: "Маршрут между исторической Асакусой и динамичным Сибуя с обзорной современной точкой.", longDescription: "Экскурсия помогает увидеть контраст Токио: от храмового района Асакуса до неоновых улиц Сибуя. Гид объясняет, как традиционные пространства сосуществуют с современной городской средой.", price: 14000, currency: "JPY", durationHours: 4, rating: 4.94, reviewCount: 69, language: "Japanese, English", maxGroupSize: 10, image: GUIDE_PLACEHOLDER, meetingPoint: "Kaminarimon Gate, Asakusa", latitude: 35.6762, longitude: 139.6503,
+      route: [ { title: "Сэнсо-дзи", lat: 35.7148, lon: 139.7967, note: "Исторический храм" }, { title: "Район Асакуса", lat: 35.7119, lon: 139.7965, note: "Традиционные улицы" }, { title: "Перекресток Сибуя", lat: 35.6595, lon: 139.7005, note: "Символ современного Токио" }, { title: "Tokyo Metropolitan Government Building", lat: 35.6896, lon: 139.6917, note: "Обзорная точка" }],
+      program: ["Встреча в Асакусе", "Сэнсо-дзи и квартал ремесел", "Переезд в Сибуя", "Современный Токио и обзорная площадка"], gallery: [], usePlaceholderAssets: true },
+    {
+      slug: "kyoto-temples-gion-gardens", guideSlug: "aiko-nakamura", title: "Киото: храмы, сады и квартал Гион", country: "Япония", city: "Киото", region: "Кансай", category: "Историческая / Культурная", description: "Классический маршрут по храмам Киото и историческому кварталу Гион.", longDescription: "Программа охватывает самые узнаваемые культурные точки Киото и дает контекст о религиозных традициях, городском укладе и чайной культуре. Подходит для первого посещения древней столицы Японии.", price: 16000, currency: "JPY", durationHours: 5, rating: 4.97, reviewCount: 73, language: "Japanese, English", maxGroupSize: 8, image: GUIDE_PLACEHOLDER, meetingPoint: "Fushimi Inari Taisha", latitude: 35.0116, longitude: 135.7681,
+      route: [ { title: "Фусими Инари", lat: 34.9671, lon: 135.7727, note: "Тории и храмовый комплекс" }, { title: "Кинкаку-дзи", lat: 35.0394, lon: 135.7292, note: "Золотой павильон" }, { title: "Квартал Гион", lat: 35.0037, lon: 135.7788, note: "Традиционные улицы" }, { title: "Hanamikoji Street", lat: 35.0031, lon: 135.7778, note: "Чайные дома" }],
+      program: ["Встреча у Фусими Инари", "Переезд к Кинкаку-дзи", "Прогулка по Гиону", "Традиционные улицы и чайные дома"], gallery: [], usePlaceholderAssets: true }
   ];
 
   for (const tour of tours) {
-    const { guideSlug, route, program, ...tourData } = tour;
+    const { guideSlug, route, program, usePlaceholderAssets, ...tourData } = tour;
     delete (tourData as Record<string, unknown>).gallery;
     await prisma.tour.create({
       data: {
         ...tourData,
-        image: TOUR_ASSETS_BY_SLUG[tour.slug]?.image ?? tourAsset(tour.slug, "cover"),
+        image: usePlaceholderAssets ? (tourData.image || GUIDE_PLACEHOLDER) : (TOUR_ASSETS_BY_SLUG[tour.slug]?.image ?? tourAsset(tour.slug, "cover")),
         routeJson: JSON.stringify(route),
         programJson: JSON.stringify(program),
-        galleryJson: JSON.stringify(TOUR_ASSETS_BY_SLUG[tour.slug]?.gallery ?? [tourAsset(tour.slug, "route-1"), tourAsset(tour.slug, "route-2")]),
+        galleryJson: JSON.stringify(usePlaceholderAssets ? [] : (TOUR_ASSETS_BY_SLUG[tour.slug]?.gallery ?? [tourAsset(tour.slug, "route-1"), tourAsset(tour.slug, "route-2")])),
         guideId: guideMap[guideSlug].id
       }
     });
