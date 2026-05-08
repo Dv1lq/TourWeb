@@ -18,6 +18,9 @@ function guideAsset(slug: string) {
   return `/images/guides/${slug}.jpg`;
 }
 
+const GUIDE_PLACEHOLDER =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Crect width='640' height='640' fill='%23e2e8f0'/%3E%3Ccircle cx='320' cy='246' r='122' fill='%2394a3b8'/%3E%3Cpath d='M128 560c24-108 110-182 192-182s168 74 192 182' fill='%2394a3b8'/%3E%3C/svg%3E";
+
 
 function issued(value: string) {
   return new Date(`${value}T09:00:00.000Z`);
@@ -196,6 +199,150 @@ async function main() {
       certificateIssuedAt: issued("2020-11-25"),
       certificateIssuer: "Dubai Department of Economy and Tourism",
       bio: "Лицензированный гид Дубая с опытом городских и пустынных программ. Следит за таймингом, погодой и комфортом группы в жарком климате."
+    },
+    {
+      slug: "lukas-meier",
+      name: "Lukas Meier",
+      photo: GUIDE_PLACEHOLDER,
+      country: "Швейцария",
+      city: "Цюрих / Люцерн",
+      experienceYears: 9,
+      specialization: "Старые города Швейцарии, история, архитектура, Альпы",
+      languages: "Deutsch, English, Français",
+      rating: 4.9,
+      completedTours: 980,
+      certificateNumber: "CH-GUIDE-2021-304",
+      certificateIssuedAt: issued("2021-04-18"),
+      certificateIssuer: "Swiss Tour Guides Association",
+      bio: "Проводит авторские маршруты по Цюриху и Люцерну, сочетая городскую историю с альпийскими панорамами. Помогает гостям понимать местную архитектуру и культурные различия между регионами Швейцарии."
+    },
+    {
+      slug: "anna-keller",
+      name: "Anna Keller",
+      photo: GUIDE_PLACEHOLDER,
+      country: "Швейцария",
+      city: "Женева / Интерлакен",
+      experienceYears: 8,
+      specialization: "Международная Женева, Альпы, природные маршруты, озёра Швейцарии",
+      languages: "Deutsch, English, Français",
+      rating: 4.9,
+      completedTours: 870,
+      certificateNumber: "CH-ALPS-2020-118",
+      certificateIssuedAt: issued("2020-09-12"),
+      certificateIssuer: "Swiss Tourism Federation",
+      bio: "Организует экскурсии между Женевой и Интерлакеном с акцентом на природные локации и озёрные маршруты. Отлично адаптирует программы для семей и путешественников, впервые приехавших в Альпы."
+    },
+    {
+      slug: "hans-muller",
+      name: "Hans Müller",
+      photo: GUIDE_PLACEHOLDER,
+      country: "Германия",
+      city: "Берлин",
+      experienceYears: 10,
+      specialization: "История Берлина, XX век, музеи, Берлинская стена",
+      languages: "Deutsch, English, Русский",
+      rating: 4.9,
+      completedTours: 1120,
+      certificateNumber: "DE-BER-2021-442",
+      certificateIssuedAt: issued("2021-06-05"),
+      certificateIssuer: "Berlin Guide Association",
+      bio: "Специализируется на маршрутах по ключевым местам Берлина XX века: от музейного острова до следов Берлинской стены. Структурирует сложный исторический материал так, чтобы он был понятен без предварительной подготовки."
+    },
+    {
+      slug: "sophie-schneider",
+      name: "Sophie Schneider",
+      photo: GUIDE_PLACEHOLDER,
+      country: "Германия",
+      city: "Мюнхен / Бавария",
+      experienceYears: 7,
+      specialization: "Бавария, замки, гастрономия, старые города Германии",
+      languages: "Deutsch, English",
+      rating: 4.8,
+      completedTours: 790,
+      certificateNumber: "DE-BAV-2022-216",
+      certificateIssuedAt: issued("2022-03-22"),
+      certificateIssuer: "Bavarian Tour Guides Guild",
+      bio: "Проводит экскурсии по Мюнхену и Баварии с фокусом на исторические центры, замки и региональные гастрономические традиции. Уделяет внимание логистике, чтобы насыщенные выездные дни проходили комфортно."
+    },
+    {
+      slug: "haruto-tanaka",
+      name: "Haruto Tanaka",
+      photo: GUIDE_PLACEHOLDER,
+      country: "Япония",
+      city: "Токио",
+      experienceYears: 8,
+      specialization: "Современная Япония, городская культура, храмы Токио, Асакуса, Сибуя",
+      languages: "Japanese, English",
+      rating: 4.9,
+      completedTours: 940,
+      certificateNumber: "JP-TYO-2021-507",
+      certificateIssuedAt: issued("2021-05-14"),
+      certificateIssuer: "Japan Federation of Certified Guides",
+      bio: "Ведёт городские маршруты по Токио, где соединяет динамику современных кварталов и историю храмов. Особенно популярен формат прогулок Асакуса—Сибуя с разбором городской культуры и повседневных традиций."
+    },
+    {
+      slug: "aiko-nakamura",
+      name: "Aiko Nakamura",
+      photo: GUIDE_PLACEHOLDER,
+      country: "Япония",
+      city: "Киото / Нара",
+      experienceYears: 9,
+      specialization: "Традиционная культура, храмы, сады, чайные кварталы, Нара",
+      languages: "Japanese, English",
+      rating: 5,
+      completedTours: 1050,
+      certificateNumber: "JP-KYO-2020-331",
+      certificateIssuedAt: issued("2020-10-08"),
+      certificateIssuer: "Kyoto Licensed Guide Association",
+      bio: "Специалист по культурному наследию Киото и Нары: храмовым ансамблям, садам и историческим кварталам. Делает акцент на этикете посещения святынь и контексте японских сезонных традиций."
+    },
+    {
+      slug: "ren-sato",
+      name: "Ren Sato",
+      photo: GUIDE_PLACEHOLDER,
+      country: "Япония",
+      city: "Осака / Хиросима / Камакура / Никко",
+      experienceYears: 7,
+      specialization: "Гастрономические маршруты, исторические выездные экскурсии, святилища, городская культура",
+      languages: "Japanese, English",
+      rating: 4.8,
+      completedTours: 820,
+      certificateNumber: "JP-KANSAI-2022-614",
+      certificateIssuedAt: issued("2022-07-19"),
+      certificateIssuer: "Japan National Tourism Organization Guide Registry",
+      bio: "Сопровождает мультигородские программы по Кансаю и соседним регионам, сочетая локальную кухню и исторические локации. Помогает выстраивать маршрут так, чтобы в одной поездке увидеть разные стороны Японии."
+    },
+    {
+      slug: "li-wei",
+      name: "Li Wei",
+      photo: GUIDE_PLACEHOLDER,
+      country: "Китай",
+      city: "Пекин",
+      experienceYears: 9,
+      specialization: "Императорский Китай, Запретный город, Великая Китайская стена",
+      languages: "Chinese, English",
+      rating: 4.9,
+      completedTours: 990,
+      certificateNumber: "CN-BJS-2021-884",
+      certificateIssuedAt: issued("2021-08-11"),
+      certificateIssuer: "Beijing Licensed Tour Guide Center",
+      bio: "Эксперт по императорской истории Пекина и главным памятникам эпох Мин и Цин. На маршрутах сочетает исторические факты с практическими рекомендациями по посещению самых загруженных локаций."
+    },
+    {
+      slug: "chen-mei",
+      name: "Chen Mei",
+      photo: GUIDE_PLACEHOLDER,
+      country: "Китай",
+      city: "Шанхай / Сиань",
+      experienceYears: 8,
+      specialization: "Архитектура Китая, музеи, древние столицы, Шанхай и Терракотовая армия",
+      languages: "Chinese, English",
+      rating: 4.8,
+      completedTours: 910,
+      certificateNumber: "CN-SHA-2022-159",
+      certificateIssuedAt: issued("2022-02-16"),
+      certificateIssuer: "China Tourism Guide Association",
+      bio: "Проводит экскурсии в Шанхае и Сиане, объясняя эволюцию китайской архитектуры от древних столиц до современного мегаполиса. Подходит для гостей, которым важны музеи и глубокий исторический контекст."
     }
   ];
 
