@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import { getCurrencyLabel, normalizeCurrency } from "@/lib/currency";
 
 export const demoUserId = "demo-user";
 
@@ -7,11 +8,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatMoney(amount: number, currency: string) {
-  return new Intl.NumberFormat("ru-RU", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0
-  }).format(amount);
+  const code = normalizeCurrency(currency);
+  const value = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 0 }).format(amount);
+  return `${value} ${getCurrencyLabel(code)}`;
 }
 
 export function formatDate(value: string | Date) {

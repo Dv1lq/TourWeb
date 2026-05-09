@@ -15,6 +15,7 @@ export function HomeSearch() {
     city: "",
     date: "",
     maxPrice: "",
+    priceCurrency: "USD",
     minRating: "",
     language: "",
     category: ""
@@ -96,7 +97,7 @@ export function HomeSearch() {
           </select>
         </label>
       </div>
-      <div className="grid gap-3 md:grid-cols-5">
+      <div className="grid gap-3 md:grid-cols-6">
         <label>
           <span className="label">Дата</span>
           <input className="field mt-1" type="date" value={form.date} onChange={(event) => update("date", event.target.value)} />
@@ -104,6 +105,18 @@ export function HomeSearch() {
         <label>
           <span className="label">Цена до</span>
           <input className="field mt-1" type="number" value={form.maxPrice} onChange={(event) => update("maxPrice", event.target.value)} placeholder="10000" />
+        </label>
+        <label>
+          <span className="label">Валюта</span>
+          <select className="field mt-1" value={form.priceCurrency} onChange={(event) => update("priceCurrency", event.target.value)}>
+            <option value="USD">$ USD</option>
+            <option value="RUB">₽ RUB</option>
+            <option value="EUR">€ EUR</option>
+            <option value="CHF">CHF</option>
+            <option value="JPY">¥ JPY</option>
+            <option value="CNY">¥ CNY</option>
+            <option value="AED">AED</option>
+          </select>
         </label>
         <label>
           <span className="label">Рейтинг от</span>

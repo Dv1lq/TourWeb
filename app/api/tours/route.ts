@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { comparePrice, normalizeCurrency } from "@/lib/currency";
 import { serializeTour } from "@/lib/serializers";
 
 export async function GET(request: Request) {
@@ -9,6 +10,7 @@ export async function GET(request: Request) {
   const country = searchParams.get("country")?.trim();
   const city = searchParams.get("city")?.trim();
   const maxPrice = Number(searchParams.get("maxPrice") ?? "");
+  const priceCurrency = normalizeCurrency(searchParams.get("priceCurrency"));
   const minRating = Number(searchParams.get("minRating") ?? "");
   const maxDuration = Number(searchParams.get("maxDuration") ?? "");
   const category = searchParams.get("category")?.trim();
@@ -34,7 +36,6 @@ export async function GET(request: Request) {
   if (city) andFilters.push({ OR: [{ city: { contains: city } }, { region: { contains: city } }] });
   if (category) where.category = category;
   if (language) where.language = { contains: language };
-  if (!Number.isNaN(maxPrice) && maxPrice > 0) where.price = { lte: maxPrice };
   if (!Number.isNaN(minRating) && minRating > 0) where.rating = { gte: minRating };
   if (!Number.isNaN(maxDuration) && maxDuration > 0) where.durationHours = { lte: maxDuration };
   if (certified) where.guide = { is: { verified: true } };
@@ -55,8 +56,13 @@ export async function GET(request: Request) {
     include: { guide: true }
   });
 
+  const filteredTours =
+    !Number.isNaN(maxPrice) && maxPrice > 0
+      ? tours.filter((tour) => comparePrice(tour.price, tour.currency, maxPrice, priceCurrency))
+      : tours;
+
   return NextResponse.json({
-    tours: tours.map(serializeTour),
-    total: tours.length
+    tours: filteredTours.map(serializeTour),
+    total: filteredTours.length
   });
 }

@@ -13,6 +13,7 @@ const initialFilters = {
   country: "",
   city: "",
   maxPrice: "",
+  priceCurrency: "USD",
   minRating: "",
   maxDuration: "",
   category: "",
@@ -29,6 +30,7 @@ export function CatalogClient() {
     country: searchParams.get("country") ?? "",
     city: searchParams.get("city") ?? "",
     maxPrice: searchParams.get("maxPrice") ?? "",
+    priceCurrency: searchParams.get("priceCurrency") ?? "USD",
     minRating: searchParams.get("minRating") ?? "",
     category: searchParams.get("category") ?? "",
     language: searchParams.get("language") ?? "",
@@ -144,6 +146,18 @@ export function CatalogClient() {
               <input className="field mt-1" type="number" value={filters.maxPrice} onChange={(event) => update("maxPrice", event.target.value)} />
             </label>
             <label>
+              <span className="label">Валюта</span>
+              <select className="field mt-1" value={filters.priceCurrency} onChange={(event) => update("priceCurrency", event.target.value)}>
+                <option value="USD">$ USD</option>
+                <option value="RUB">₽ RUB</option>
+                <option value="EUR">€ EUR</option>
+                <option value="CHF">CHF</option>
+                <option value="JPY">¥ JPY</option>
+                <option value="CNY">¥ CNY</option>
+                <option value="AED">AED</option>
+              </select>
+            </label>
+            <label className="col-span-2">
               <span className="label">Рейтинг от</span>
               <input className="field mt-1" type="number" step="0.1" min="0" max="5" value={filters.minRating} onChange={(event) => update("minRating", event.target.value)} />
             </label>
