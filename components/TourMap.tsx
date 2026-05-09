@@ -1,7 +1,8 @@
 "use client";
 
-import { MapContainer, Marker, Popup, Polyline, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, Polyline, TileLayer, useMap } from "react-leaflet";
 import L from "leaflet";
+import { useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 
 type Point = { title: string; lat: number; lng: number };
@@ -14,6 +15,17 @@ const icon = L.icon({
   iconAnchor: [12, 41]
 });
 
+
+function MapAttributionPrefix() {
+  const map = useMap();
+
+  useEffect(() => {
+    map.attributionControl.setPrefix("Leaflet");
+  }, [map]);
+
+  return null;
+}
+
 export function TourMap({ title, coordinates, routePoints }: { title: string; coordinates: { lat: number; lng: number }; routePoints: Point[] }) {
   const points = routePoints.length ? routePoints : [{ title, ...coordinates }];
 
@@ -21,7 +33,8 @@ export function TourMap({ title, coordinates, routePoints }: { title: string; co
     <section className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]" id="tour-map">
       <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
         <MapContainer center={[coordinates.lat, coordinates.lng]} zoom={13} className="h-80 w-full" scrollWheelZoom={false}>
-          <TileLayer attribution='&copy; OpenStreetMap contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <MapAttributionPrefix />
+          <TileLayer attribution="&copy; OpenStreetMap contributors" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {points.map((point) => (
             <Marker key={`${point.title}-${point.lat}-${point.lng}`} position={[point.lat, point.lng]} icon={icon}>
               <Popup>{point.title}</Popup>
