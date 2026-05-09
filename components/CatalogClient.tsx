@@ -6,17 +6,14 @@ import { Filter, Loader2, RotateCcw } from "lucide-react";
 import type { TourView } from "@/lib/types";
 import { EmptyState } from "@/components/EmptyState";
 import { TourCard } from "@/components/TourCard";
-
-const countries = ["", "Россия", "Грузия", "ОАЭ"];
-const cities = ["", "Казань", "Москва", "Санкт-Петербург", "Байкал", "Тбилиси", "Дубай"];
-const categories = ["", "Историческая", "Музейная", "Природная", "Авторская", "Семейная", "Обзорная", "Этнокультурная", "Выездная"];
-const languages = ["", "Русский", "English", "Deutsch", "Français"];
+import { buildTourFilterOptions } from "@/lib/tour-filter-options";
 
 const initialFilters = {
   q: "",
   country: "",
   city: "",
   maxPrice: "",
+  priceCurrency: "USD",
   minRating: "",
   maxDuration: "",
   category: "",
@@ -33,12 +30,14 @@ export function CatalogClient() {
     country: searchParams.get("country") ?? "",
     city: searchParams.get("city") ?? "",
     maxPrice: searchParams.get("maxPrice") ?? "",
+    priceCurrency: searchParams.get("priceCurrency") ?? "USD",
     minRating: searchParams.get("minRating") ?? "",
     category: searchParams.get("category") ?? "",
     language: searchParams.get("language") ?? "",
     certified: searchParams.get("certified") === "true"
   }));
   const [tours, setTours] = useState<TourView[]>([]);
+  const [allTours, setAllTours] = useState<TourView[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -76,6 +75,24 @@ export function CatalogClient() {
 
     return () => controller.abort();
   }, [query]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch("/api/tours", { signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Не удалось загрузить фильтры");
+        }
+        return response.json();
+      })
+      .then((payload) => setAllTours(payload.tours))
+      .catch(() => {});
+
+    return () => controller.abort();
+  }, []);
+
+  const { countries, cities, categories, languages } = useMemo(() => buildTourFilterOptions(allTours), [allTours]);
 
   function update(field: keyof typeof filters, value: string | boolean) {
     setFilters((current) => ({ ...current, [field]: value }));
@@ -129,6 +146,18 @@ export function CatalogClient() {
               <input className="field mt-1" type="number" value={filters.maxPrice} onChange={(event) => update("maxPrice", event.target.value)} />
             </label>
             <label>
+              <span className="label">Валюта</span>
+              <select className="field mt-1" value={filters.priceCurrency} onChange={(event) => update("priceCurrency", event.target.value)}>
+                <option value="USD">$ USD</option>
+                <option value="RUB">₽ RUB</option>
+                <option value="EUR">€ EUR</option>
+                <option value="CHF">CHF</option>
+                <option value="JPY">¥ JPY</option>
+                <option value="CNY">¥ CNY</option>
+                <option value="AED">AED</option>
+              </select>
+            </label>
+            <label className="col-span-2">
               <span className="label">Рейтинг от</span>
               <input className="field mt-1" type="number" step="0.1" min="0" max="5" value={filters.minRating} onChange={(event) => update("minRating", event.target.value)} />
             </label>

@@ -1,21 +1,21 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
-
-const categories = ["", "Историческая", "Музейная", "Природная", "Авторская", "Семейная", "Обзорная", "Этнокультурная", "Выездная"];
-const countries = ["", "Россия", "Грузия", "ОАЭ"];
-const languages = ["", "Русский", "English", "Deutsch", "Français"];
+import type { TourView } from "@/lib/types";
+import { buildTourFilterOptions } from "@/lib/tour-filter-options";
 
 export function HomeSearch() {
   const router = useRouter();
+  const [allTours, setAllTours] = useState<TourView[]>([]);
   const [form, setForm] = useState({
     q: "",
     country: "",
     city: "",
     date: "",
     maxPrice: "",
+    priceCurrency: "USD",
     minRating: "",
     language: "",
     category: ""
@@ -24,6 +24,34 @@ export function HomeSearch() {
   function update(field: keyof typeof form, value: string) {
     setForm((current) => ({ ...current, [field]: value }));
   }
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch("/api/tours", { signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Не удалось загрузить фильтры");
+        }
+        return response.json();
+      })
+      .then((payload) => setAllTours(payload.tours))
+      .catch(() => {});
+
+    return () => controller.abort();
+  }, []);
+
+  const { countries, categories, languages } = useMemo(() => buildTourFilterOptions(allTours), [allTours]);
+  const cities = useMemo(() => {
+    const toursForCountry = form.country ? allTours.filter((tour) => tour.country === form.country) : allTours;
+    return buildTourFilterOptions(toursForCountry).cities;
+  }, [allTours, form.country]);
+
+  useEffect(() => {
+    if (form.city && !cities.includes(form.city)) {
+      setForm((current) => ({ ...current, city: "" }));
+    }
+  }, [cities, form.city]);
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -60,10 +88,16 @@ export function HomeSearch() {
         </label>
         <label>
           <span className="label">Город/регион</span>
-          <input className="field mt-1" value={form.city} onChange={(event) => update("city", event.target.value)} placeholder="Казань" />
+          <select className="field mt-1" value={form.city} onChange={(event) => update("city", event.target.value)}>
+            {cities.map((city) => (
+              <option key={city || "all"} value={city}>
+                {city || "Все города"}
+              </option>
+            ))}
+          </select>
         </label>
       </div>
-      <div className="grid gap-3 md:grid-cols-5">
+      <div className="grid gap-3 md:grid-cols-6">
         <label>
           <span className="label">Дата</span>
           <input className="field mt-1" type="date" value={form.date} onChange={(event) => update("date", event.target.value)} />
@@ -71,6 +105,18 @@ export function HomeSearch() {
         <label>
           <span className="label">Цена до</span>
           <input className="field mt-1" type="number" value={form.maxPrice} onChange={(event) => update("maxPrice", event.target.value)} placeholder="10000" />
+        </label>
+        <label>
+          <span className="label">Валюта</span>
+          <select className="field mt-1" value={form.priceCurrency} onChange={(event) => update("priceCurrency", event.target.value)}>
+            <option value="USD">$ USD</option>
+            <option value="RUB">₽ RUB</option>
+            <option value="EUR">€ EUR</option>
+            <option value="CHF">CHF</option>
+            <option value="JPY">¥ JPY</option>
+            <option value="CNY">¥ CNY</option>
+            <option value="AED">AED</option>
+          </select>
         </label>
         <label>
           <span className="label">Рейтинг от</span>
