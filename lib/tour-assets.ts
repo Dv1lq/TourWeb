@@ -84,6 +84,86 @@ export const TOUR_ASSETS_BY_SLUG: Record<string, TourAssets> = {
   "vdnh-ostankino-soviet-modern": {
     image: "/images/tours/vdnh-ostankino-cover.jpg",
     gallery: ["/images/tours/vdnh-ostankino-route-1.jpg", "/images/tours/vdnh-ostankino-route-2.jpg"]
+  },
+  "zurich-old-town-limmat": {
+    image: "/images/tours/zurich-old-town-limmat-cover.png",
+    gallery: ["/images/tours/zurich-old-town-limmat-route-1.png", "/images/tours/zurich-old-town-limmat-route-2.png"]
+  },
+  "lucerne-kapelbrucke-alps": {
+    image: "/images/tours/lucerne-kapelbrucke-alps-cover.png",
+    gallery: ["/images/tours/lucerne-kapelbrucke-alps-route-1.png", "/images/tours/lucerne-kapelbrucke-alps-route-2.png"]
+  },
+  "interlaken-bernese-alps-panorama": {
+    image: "/images/tours/interlaken-bernese-alps-panorama-cover.png",
+    gallery: ["/images/tours/interlaken-bernese-alps-panorama-route-1.png", "/images/tours/interlaken-bernese-alps-panorama-route-2.png"]
+  },
+  "geneva-international-old-town": {
+    image: "/images/tours/geneva-international-old-town-cover.png",
+    gallery: ["/images/tours/geneva-international-old-town-route-1.png", "/images/tours/geneva-international-old-town-route-2.png"]
+  },
+  "berlin-xx-century-traces": {
+    image: "/images/tours/berlin-xx-century-traces-cover.png",
+    gallery: ["/images/tours/berlin-xx-century-traces-route-1.png", "/images/tours/berlin-xx-century-traces-route-2.png"]
+  },
+  "munich-marienplatz-bavarian-traditions": {
+    image: "/images/tours/munich-marienplatz-bavarian-traditions-cover.png",
+    gallery: ["/images/tours/munich-marienplatz-bavarian-traditions-route-1.png", "/images/tours/munich-marienplatz-bavarian-traditions-route-2.png"]
+  },
+  "neuschwanstein-romantic-bavaria": {
+    image: "/images/tours/neuschwanstein-romantic-bavaria-cover.png",
+    gallery: ["/images/tours/neuschwanstein-romantic-bavaria-route-1.png", "/images/tours/neuschwanstein-romantic-bavaria-route-2.png"]
+  },
+  "dresden-baroque-old-masters": {
+    image: "/images/tours/dresden-baroque-old-masters-cover.png",
+    gallery: ["/images/tours/dresden-baroque-old-masters-route-1.png", "/images/tours/dresden-baroque-old-masters-route-2.png"]
+  },
+  "tokyo-asakusa-shibuya-metropolis": {
+    image: "/images/tours/tokyo-asakusa-shibuya-metropolis-cover.png",
+    gallery: ["/images/tours/tokyo-asakusa-shibuya-metropolis-route-1.png", "/images/tours/tokyo-asakusa-shibuya-metropolis-route-2.png"]
+  },
+  "kyoto-temples-gion-gardens": {
+    image: "/images/tours/kyoto-temples-gion-gardens-cover.png",
+    gallery: ["/images/tours/kyoto-temples-gion-gardens-route-1.png", "/images/tours/kyoto-temples-gion-gardens-route-2.png"]
+  },
+  "nara-deer-park-ancient-temples": {
+    image: "/images/tours/nara-deer-park-ancient-temples-cover.png",
+    gallery: ["/images/tours/nara-deer-park-ancient-temples-route-1.png", "/images/tours/nara-deer-park-ancient-temples-route-2.png"]
+  },
+  "fuji-hakone-lake-volcano-views": {
+    image: "/images/tours/fuji-hakone-lake-volcano-views-cover.png",
+    gallery: ["/images/tours/fuji-hakone-lake-volcano-views-route-1.png", "/images/tours/fuji-hakone-lake-volcano-views-route-2.png"]
+  },
+  "osaka-food-night-dotonbori": {
+    image: "/images/tours/osaka-food-night-dotonbori-cover.png",
+    gallery: ["/images/tours/osaka-food-night-dotonbori-route-1.png", "/images/tours/osaka-food-night-dotonbori-route-2.png"]
+  },
+  "hiroshima-miyajima-itsukushima": {
+    image: "/images/tours/hiroshima-miyajima-itsukushima-cover.png",
+    gallery: ["/images/tours/hiroshima-miyajima-itsukushima-route-1.png", "/images/tours/hiroshima-miyajima-itsukushima-route-2.png"]
+  },
+  "kamakura-great-buddha-ocean": {
+    image: "/images/tours/kamakura-great-buddha-ocean-cover.png",
+    gallery: ["/images/tours/kamakura-great-buddha-ocean-route-1.png", "/images/tours/kamakura-great-buddha-ocean-route-2.png"]
+  },
+  "nikko-toshogu-mountains": {
+    image: "/images/tours/nikko-toshogu-mountains-cover.png",
+    gallery: ["/images/tours/nikko-toshogu-mountains-route-1.png", "/images/tours/nikko-toshogu-mountains-route-2.png"]
+  },
+  "beijing-forbidden-city-tiananmen": {
+    image: "/images/tours/beijing-forbidden-city-tiananmen-cover.png",
+    gallery: ["/images/tours/beijing-forbidden-city-tiananmen-route-1.png", "/images/tours/beijing-forbidden-city-tiananmen-route-2.png"]
+  },
+  "mutianyu-great-wall-day-trip": {
+    image: "/images/tours/mutianyu-great-wall-day-trip-cover.png",
+    gallery: ["/images/tours/mutianyu-great-wall-day-trip-route-1.png", "/images/tours/mutianyu-great-wall-day-trip-route-2.png"]
+  },
+  "shanghai-bund-pudong-old-city": {
+    image: "/images/tours/shanghai-bund-pudong-old-city-cover.png",
+    gallery: ["/images/tours/shanghai-bund-pudong-old-city-route-1.png", "/images/tours/shanghai-bund-pudong-old-city-route-2.png"]
+  },
+  "xian-terracotta-ancient-capital": {
+    image: "/images/tours/xian-terracotta-ancient-capital-cover.png",
+    gallery: ["/images/tours/xian-terracotta-ancient-capital-route-1.png", "/images/tours/xian-terracotta-ancient-capital-route-2.png"]
   }
 };
 

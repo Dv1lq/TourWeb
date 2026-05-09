@@ -1131,22 +1131,27 @@ async function main() {
   for (const tour of tours) {
     const { guideSlug, route, program, usePlaceholderAssets, ...tourData } = tour;
     const explicitGallery = ((tour as { gallery?: string[] }).gallery ?? []).filter(Boolean);
+    const mappedAssets = TOUR_ASSETS_BY_SLUG[tour.slug];
     delete (tourData as Record<string, unknown>).gallery;
     await prisma.tour.create({
       data: {
         ...tourData,
-        image: tourData.image && tourData.image !== GUIDE_PLACEHOLDER
+        image: mappedAssets
+          ? mappedAssets.image
+          : tourData.image && tourData.image !== GUIDE_PLACEHOLDER
           ? tourData.image
           : usePlaceholderAssets
             ? (tourData.image || GUIDE_PLACEHOLDER)
-            : (TOUR_ASSETS_BY_SLUG[tour.slug]?.image ?? tourAsset(tour.slug, "cover")),
+            : tourAsset(tour.slug, "cover"),
         routeJson: JSON.stringify(route),
         programJson: JSON.stringify(program),
         galleryJson: JSON.stringify(explicitGallery.length >= 2
           ? explicitGallery
+          : mappedAssets
+            ? mappedAssets.gallery
           : usePlaceholderAssets
             ? []
-            : (TOUR_ASSETS_BY_SLUG[tour.slug]?.gallery ?? [tourAsset(tour.slug, "route-1"), tourAsset(tour.slug, "route-2")])),
+            : [tourAsset(tour.slug, "route-1"), tourAsset(tour.slug, "route-2")]),
         guideId: guideMap[guideSlug].id
       }
     });
