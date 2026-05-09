@@ -7,11 +7,6 @@ import type { TourView } from "@/lib/types";
 import { EmptyState } from "@/components/EmptyState";
 import { TourCard } from "@/components/TourCard";
 
-const countries = ["", "Россия", "Грузия", "ОАЭ"];
-const cities = ["", "Казань", "Москва", "Санкт-Петербург", "Байкал", "Тбилиси", "Дубай"];
-const categories = ["", "Историческая", "Музейная", "Природная", "Авторская", "Семейная", "Обзорная", "Этнокультурная", "Выездная"];
-const languages = ["", "Русский", "English", "Deutsch", "Français"];
-
 const initialFilters = {
   q: "",
   country: "",
@@ -39,6 +34,7 @@ export function CatalogClient() {
     certified: searchParams.get("certified") === "true"
   }));
   const [tours, setTours] = useState<TourView[]>([]);
+  const [allTours, setAllTours] = useState<TourView[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -76,6 +72,52 @@ export function CatalogClient() {
 
     return () => controller.abort();
   }, [query]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch("/api/tours", { signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Не удалось загрузить фильтры");
+        }
+        return response.json();
+      })
+      .then((payload) => setAllTours(payload.tours))
+      .catch(() => {});
+
+    return () => controller.abort();
+  }, []);
+
+  const countries = useMemo(() => ["", ...Array.from(new Set(allTours.map((tour) => tour.country))).sort((a, b) => a.localeCompare(b))], [allTours]);
+  const cities = useMemo(
+    () =>
+      [
+        "",
+        ...Array.from(
+          new Set(allTours.flatMap((tour) => [tour.city, tour.region].filter(Boolean)))
+        ).sort((a, b) => a.localeCompare(b))
+      ],
+    [allTours]
+  );
+  const categories = useMemo(() => ["", ...Array.from(new Set(allTours.map((tour) => tour.category))).sort((a, b) => a.localeCompare(b))], [allTours]);
+  const languages = useMemo(
+    () =>
+      [
+        "",
+        ...Array.from(
+          new Set(
+            allTours.flatMap((tour) =>
+              tour.language
+                .split(",")
+                .map((value) => value.trim())
+                .filter(Boolean)
+            )
+          )
+        ).sort((a, b) => a.localeCompare(b))
+      ],
+    [allTours]
+  );
 
   function update(field: keyof typeof filters, value: string | boolean) {
     setFilters((current) => ({ ...current, [field]: value }));

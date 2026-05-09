@@ -17,6 +17,7 @@ export async function GET(request: Request) {
   const sort = searchParams.get("sort") ?? "rating";
 
   const where: Prisma.TourWhereInput = {};
+  const andFilters: Prisma.TourWhereInput[] = [];
 
   if (q) {
     where.OR = [
@@ -30,13 +31,14 @@ export async function GET(request: Request) {
   }
 
   if (country) where.country = country;
-  if (city) where.city = { contains: city };
+  if (city) andFilters.push({ OR: [{ city: { contains: city } }, { region: { contains: city } }] });
   if (category) where.category = category;
   if (language) where.language = { contains: language };
   if (!Number.isNaN(maxPrice) && maxPrice > 0) where.price = { lte: maxPrice };
   if (!Number.isNaN(minRating) && minRating > 0) where.rating = { gte: minRating };
   if (!Number.isNaN(maxDuration) && maxDuration > 0) where.durationHours = { lte: maxDuration };
   if (certified) where.guide = { is: { verified: true } };
+  if (andFilters.length > 0) where.AND = andFilters;
 
   const orderBy: Prisma.TourOrderByWithRelationInput =
     sort === "price-asc"
