@@ -111,6 +111,12 @@ export function serializeGuide(guide: RawGuide): GuideSummary {
     certificateNumber: guide.certificateNumber,
     certificateIssuedAt: toIso(guide.certificateIssuedAt),
     certificateIssuer: guide.certificateIssuer,
+    certificate: {
+      number: guide.certificateNumber,
+      issuedAt: toIso(guide.certificateIssuedAt),
+      issuer: guide.certificateIssuer,
+      verified: guide.verified
+    },
     bio: guide.bio,
     verified: guide.verified
   };
@@ -139,6 +145,8 @@ export function serializeTour(tour: RawTour): TourView {
     latitude: tour.latitude,
     longitude: tour.longitude,
     route: parseJson<RoutePoint[]>(tour.routeJson, []),
+    coordinates: { lat: tour.latitude, lng: tour.longitude },
+    routePoints: parseJson<RoutePoint[]>(tour.routeJson, []).map((p) => ({ title: p.title, lat: p.lat, lng: p.lon })),
     program: parseJson<string[]>(tour.programJson, []),
     gallery: parseJson<string[]>(tour.galleryJson, []),
     guide: serializeGuide(tour.guide),

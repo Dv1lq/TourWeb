@@ -28,6 +28,12 @@ export type GuideSummary = {
   certificateNumber: string;
   certificateIssuedAt: string;
   certificateIssuer: string;
+  certificate: {
+    number: string;
+    issuedAt: string;
+    issuer: string;
+    verified: boolean;
+  };
   bio: string;
   verified: boolean;
 };
@@ -54,6 +60,8 @@ export type TourView = {
   latitude: number;
   longitude: number;
   route: RoutePoint[];
+  coordinates: { lat: number; lng: number };
+  routePoints: { title: string; lat: number; lng: number }[];
   program: string[];
   gallery: string[];
   guide: GuideSummary;
