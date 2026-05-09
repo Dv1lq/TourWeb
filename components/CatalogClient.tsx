@@ -6,6 +6,7 @@ import { Filter, Loader2, RotateCcw } from "lucide-react";
 import type { TourView } from "@/lib/types";
 import { EmptyState } from "@/components/EmptyState";
 import { TourCard } from "@/components/TourCard";
+import { buildTourFilterOptions } from "@/lib/tour-filter-options";
 
 const initialFilters = {
   q: "",
@@ -89,35 +90,7 @@ export function CatalogClient() {
     return () => controller.abort();
   }, []);
 
-  const countries = useMemo(() => ["", ...Array.from(new Set(allTours.map((tour) => tour.country))).sort((a, b) => a.localeCompare(b))], [allTours]);
-  const cities = useMemo(
-    () =>
-      [
-        "",
-        ...Array.from(
-          new Set(allTours.flatMap((tour) => [tour.city, tour.region].filter(Boolean)))
-        ).sort((a, b) => a.localeCompare(b))
-      ],
-    [allTours]
-  );
-  const categories = useMemo(() => ["", ...Array.from(new Set(allTours.map((tour) => tour.category))).sort((a, b) => a.localeCompare(b))], [allTours]);
-  const languages = useMemo(
-    () =>
-      [
-        "",
-        ...Array.from(
-          new Set(
-            allTours.flatMap((tour) =>
-              tour.language
-                .split(",")
-                .map((value) => value.trim())
-                .filter(Boolean)
-            )
-          )
-        ).sort((a, b) => a.localeCompare(b))
-      ],
-    [allTours]
-  );
+  const { countries, cities, categories, languages } = useMemo(() => buildTourFilterOptions(allTours), [allTours]);
 
   function update(field: keyof typeof filters, value: string | boolean) {
     setFilters((current) => ({ ...current, [field]: value }));
