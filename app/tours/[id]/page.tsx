@@ -2,12 +2,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BadgeCheck, CalendarCheck, Clock, Languages, MapPin, UsersRound } from "lucide-react";
 import { CertificateBadge } from "@/components/CertificateBadge";
-import { Rating } from "@/components/Rating";
+import { TourReviewsSection } from "@/components/TourReviewsSection";
 import { WeatherWidget } from "@/components/WeatherWidget";
 import { TourMapClient } from "@/components/TourMapClient";
 import { prisma } from "@/lib/prisma";
 import { serializeTour } from "@/lib/serializers";
-import { formatDate, formatDuration, formatMoney } from "@/lib/utils";
+import { formatDuration, formatMoney } from "@/lib/utils";
 
 
 type PageProps = {
@@ -99,26 +99,11 @@ export default async function TourPage({ params }: PageProps) {
             )}
           </section>
 
-          <section className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-2xl font-bold text-slate-950">Отзывы</h2>
-              <Rating value={tour.rating} reviews={tour.reviewCount} />
-            </div>
-            <div className="grid gap-4">
-              {tour.reviews?.slice(0, 5).map((review) => (
-                <article key={review.id} className="rounded-lg border border-slate-100 bg-slate-50 p-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="font-semibold text-slate-950">{review.userName}</div>
-                    <div className="text-sm text-slate-500">{formatDate(review.createdAt)}</div>
-                  </div>
-                  <div className="mt-1">
-                    <Rating value={review.rating} />
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-slate-700">{review.text}</p>
-                </article>
-              ))}
-            </div>
-          </section>
+          <TourReviewsSection
+            reviews={tour.reviews || []}
+            rating={tour.rating}
+            reviewCount={tour.reviewCount}
+          />
         </div>
 
         <aside className="grid h-fit gap-5 lg:sticky lg:top-24">
