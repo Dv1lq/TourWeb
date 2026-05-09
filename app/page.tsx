@@ -8,7 +8,7 @@ import { serializeGuide, serializeTour } from "@/lib/serializers";
 
 async function getHomeData() {
   try {
-    const [tours, guides] = await Promise.all([
+    const [tours, guides, toursCount, guidesCount, countries] = await Promise.all([
       prisma.tour.findMany({
         take: 6,
         orderBy: [{ rating: "desc" }, { reviewCount: "desc" }],
@@ -17,15 +17,26 @@ async function getHomeData() {
       prisma.guide.findMany({
         take: 4,
         orderBy: [{ rating: "desc" }, { completedTours: "desc" }]
+      }),
+      prisma.tour.count(),
+      prisma.guide.count(),
+      prisma.tour.findMany({
+        select: { country: true },
+        distinct: ["country"]
       })
     ]);
 
     return {
       tours: tours.map(serializeTour),
-      guides: guides.map(serializeGuide)
+      guides: guides.map(serializeGuide),
+      stats: {
+        tours: toursCount,
+        guides: guidesCount,
+        countries: countries.length
+      }
     };
   } catch {
-    return { tours: [], guides: [] };
+    return { tours: [], guides: [], stats: { tours: 0, guides: 0, countries: 0 } };
   }
 }
 
@@ -53,7 +64,7 @@ const advantages = [
 ];
 
 export default async function HomePage() {
-  const { tours, guides } = await getHomeData();
+  const { tours, guides, stats } = await getHomeData();
 
   return (
     <>
@@ -70,8 +81,8 @@ export default async function HomePage() {
             </div>
             <h1 className="text-5xl font-black leading-tight md:text-7xl">RouteCert</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-100">
-              Веб-сервис для поиска и бронирования экскурсий с проверенными гидами в Казани, Москве,
-              Санкт-Петербурге, на Байкале, в Тбилиси и Дубае.
+              Веб-сервис для поиска и бронирования экскурсий с проверенными гидами в России, Грузии, ОАЭ,
+              Швейцарии, Германии, Японии и Китае.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link href="/catalog" className="btn-primary bg-white text-slate-950 hover:bg-slate-100">
@@ -85,15 +96,15 @@ export default async function HomePage() {
           <HomeSearch />
           <div className="grid max-w-4xl gap-3 sm:grid-cols-3">
             <div className="rounded-lg bg-white/12 p-4 backdrop-blur">
-              <div className="text-3xl font-bold">21</div>
-              <div className="text-sm text-slate-200">демо-экскурсий</div>
+              <div className="text-3xl font-bold">{stats.tours}</div>
+              <div className="text-sm text-slate-200">экскурсий</div>
             </div>
             <div className="rounded-lg bg-white/12 p-4 backdrop-blur">
-              <div className="text-3xl font-bold">9</div>
+              <div className="text-3xl font-bold">{stats.guides}</div>
               <div className="text-sm text-slate-200">специалистов</div>
             </div>
             <div className="rounded-lg bg-white/12 p-4 backdrop-blur">
-              <div className="text-3xl font-bold">6</div>
+              <div className="text-3xl font-bold">{stats.countries}</div>
               <div className="text-sm text-slate-200">направлений</div>
             </div>
           </div>

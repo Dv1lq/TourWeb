@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 
 const categories = ["", "Историческая", "Музейная", "Природная", "Авторская", "Семейная", "Обзорная", "Этнокультурная", "Выездная"];
-const countries = ["", "Россия", "Грузия", "ОАЭ"];
+const countries = ["", "Россия", "Грузия", "ОАЭ", "Швейцария", "Германия", "Япония", "Китай"];
 const languages = ["", "Русский", "English", "Deutsch", "Français"];
 
 export function HomeSearch() {
