@@ -223,7 +223,7 @@ async function main() {
     {
       slug: "lukas-meier",
       name: "Lukas Meier",
-      photo: GUIDE_PLACEHOLDER,
+      photo: "/images/guides/lukas-meier.png",
       country: "Швейцария",
       city: "Цюрих / Люцерн",
       experienceYears: 9,
@@ -239,7 +239,7 @@ async function main() {
     {
       slug: "anna-keller",
       name: "Anna Keller",
-      photo: GUIDE_PLACEHOLDER,
+      photo: "/images/guides/anna-keller.png",
       country: "Швейцария",
       city: "Женева / Интерлакен",
       experienceYears: 8,
@@ -255,7 +255,7 @@ async function main() {
     {
       slug: "hans-muller",
       name: "Hans Müller",
-      photo: GUIDE_PLACEHOLDER,
+      photo: "/images/guides/hans-muller.png",
       country: "Германия",
       city: "Берлин",
       experienceYears: 10,
@@ -271,7 +271,7 @@ async function main() {
     {
       slug: "sophie-schneider",
       name: "Sophie Schneider",
-      photo: GUIDE_PLACEHOLDER,
+      photo: "/images/guides/sophie-schneider.png",
       country: "Германия",
       city: "Мюнхен / Бавария",
       experienceYears: 7,
@@ -287,7 +287,7 @@ async function main() {
     {
       slug: "haruto-tanaka",
       name: "Haruto Tanaka",
-      photo: GUIDE_PLACEHOLDER,
+      photo: "/images/guides/haruto-tanaka.png",
       country: "Япония",
       city: "Токио",
       experienceYears: 8,
@@ -303,7 +303,7 @@ async function main() {
     {
       slug: "aiko-nakamura",
       name: "Aiko Nakamura",
-      photo: GUIDE_PLACEHOLDER,
+      photo: "/images/guides/aiko-nakamura.png",
       country: "Япония",
       city: "Киото / Нара",
       experienceYears: 9,
@@ -319,7 +319,7 @@ async function main() {
     {
       slug: "ren-sato",
       name: "Ren Sato",
-      photo: GUIDE_PLACEHOLDER,
+      photo: "/images/guides/ren-sato.png",
       country: "Япония",
       city: "Осака / Хиросима / Камакура / Никко",
       experienceYears: 7,
@@ -335,7 +335,7 @@ async function main() {
     {
       slug: "li-wei",
       name: "Li Wei",
-      photo: GUIDE_PLACEHOLDER,
+      photo: "/images/guides/li-wei.png",
       country: "Китай",
       city: "Пекин",
       experienceYears: 9,
@@ -351,7 +351,7 @@ async function main() {
     {
       slug: "chen-mei",
       name: "Chen Mei",
-      photo: GUIDE_PLACEHOLDER,
+      photo: "/images/guides/chen-mei.png",
       country: "Китай",
       city: "Шанхай / Сиань",
       experienceYears: 8,
